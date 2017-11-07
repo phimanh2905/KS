@@ -36,7 +36,8 @@ class TypeofserviceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $typeofservice = new Typeofservice();
+        $typeofservice->TenLoaiDichVu = $request->TenLoaiDichVu;
     }
 
     /**
@@ -70,7 +71,8 @@ class TypeofserviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $typeofservice = Typeofservice::findOrFail($id);
+        $typeofservice->TenLoaiDichVu = $request->TenLoaiDichVu;
     }
 
     /**
@@ -81,6 +83,16 @@ class TypeofserviceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $typeofservices = Typeofservice::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $typeofservices = Typeofservice::where('TenLoaiDichVu','like','%'.$req->key.'%')
+        ->get();
+        $html = view('admin.typeofservice.search',compact('typeofservices'))->render();
+        return response($html); 
     }
 }

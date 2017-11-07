@@ -34,7 +34,7 @@
                                     <th>Địa chỉ</th>
                                     <th>Điện thoại</th>
                                     <th>Quốc tịch</th>
-                                    <th>Trạng thái</th>
+                                    <!-- <th>Trạng thái</th> -->
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -49,14 +49,14 @@
                                     <td>{{$customer->DiaChi}}</td>
                                     <td>{{$customer->DienThoai}}</td>
                                     <td>{{$customer->QuocTich}}</td>
-                                    <td>
+                                    <!-- <td>
                                         <button class="btn btn-success btn-circle" type="button">
                                             <i class="fa fa-check"></i>
                                         </button>
                                         <button class="btn btn-danger btn-circle" type="button">
                                             <i class="fa fa-times"></i>
                                         </button>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$customer->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>

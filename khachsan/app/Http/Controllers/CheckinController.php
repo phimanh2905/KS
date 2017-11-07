@@ -36,7 +36,13 @@ class CheckinController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checkin = new Checkin();
+        $checkin->MaPhieuThue = $request->MaPhieuThue;
+        $checkin->MaKhachHang = $request->MaKhachHang;
+        
+        // $checkin->TrangThai = $request->TrangThai;
+        $checkin->save();
+        return response()->json($checkin);
     }
 
     /**
@@ -70,7 +76,13 @@ class CheckinController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $checkin = Checkin::findOrFail($id);
+        $checkin->MaPhieuThue = $request->MaPhieuThue;
+        $checkin->MaKhachHang = $request->MaKhachHang;
+        
+        // $checkin->TrangThai = $request->TrangThai;
+        $checkin->save();
+        return response()->json($checkin);
     }
 
     /**
@@ -81,6 +93,16 @@ class CheckinController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $billdetails = Bill::find($request->id)->delete();
+       return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $billdetails = Bill::where('MaPhong','like','%'.$req->key.'%')
+        ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+        $html = view('admin.billdetail.search',compact('billdetails'))->render();
+        return response($html); 
     }
 }

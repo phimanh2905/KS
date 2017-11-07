@@ -36,7 +36,8 @@ class StatusroomtypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $statusroomtype = new Statusroomtype();
+        $statusroomtype->TenLoaiTinhTrang = $request->TenLoaiTinhTrang;
     }
 
     /**
@@ -70,7 +71,8 @@ class StatusroomtypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $statusroomtype = Statusroomtype::findOrFail($id);
+        $statusroomtype->TenLoaiTinhTrang = $request->TenLoaiTinhTrang;
     }
 
     /**
@@ -81,6 +83,16 @@ class StatusroomtypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $statusroomtypes = Statusroomtype::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $statusroomtypes = Statusroomtype::where('TenLoaiTinhTrang','like','%'.$req->key.'%')
+        ->get();
+        $html = view('admin.statusroomtype.search',compact('statusroomtypes'))->render();
+        return response($html); 
     }
 }

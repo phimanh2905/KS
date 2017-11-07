@@ -3,22 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Regulations;
+use App\Regulation;
 
-class RegulationsController extends Controller
+class RegulationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $regulationss = Regulations::all();
-        return view('admin.regulations.regulations',compact('regulationss'));
-    }
-
-    /**
+	public function index()
+	{
+		$regulations = Regulation::all();
+		return view('admin.regulation.regulation',compact('regulations'));
+	}
+	
+	/**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,7 +31,13 @@ class RegulationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regulation = new Regulation();
+        $regulation->TenQuiDinh = $request->TenQuiDinh;
+        $regulation->Mota = $request->Mota;
+        
+        // $regulation->TrangThai = $request->TrangThai;
+        $regulation->save();
+        return response()->json($regulation);
     }
 
     /**
@@ -58,7 +59,7 @@ class RegulationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -70,7 +71,13 @@ class RegulationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $regulation = Regulation::findOrFail($id);
+        $regulation->TenQuiDinh = $request->TenQuiDinh;
+        $regulation->Mota = $request->Mota;
+        
+        // $regulation->TrangThai = $request->TrangThai;
+        $regulation->save();
+        return response()->json($regulation);
     }
 
     /**
@@ -81,6 +88,15 @@ class RegulationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $regulations = Regulation::find($request->id)->delete();
+        return response()->json();
+    }
+
+    public function search(Request $req) {
+        $result = '';
+        $regulations = Regulation::where('TenQuiDinh','like','%'.$req->key.'%')
+        ->get();
+        $html = view('admin.regulation.search',compact('regulations'))->render();
+        return response($html); 
     }
 }

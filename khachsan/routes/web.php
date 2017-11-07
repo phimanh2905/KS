@@ -85,6 +85,6 @@ Route::resource('room','RoomController');
 
 // quy định
 // P.Manh - 6/11/17
-Route::resource('regulations','RegulationsController');
+Route::resource('regulation','RegulationController');
 
 

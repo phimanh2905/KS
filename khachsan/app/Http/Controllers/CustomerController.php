@@ -36,7 +36,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = new Customer();
+        $customer->TenKhach = $request->MaPhong;
+        $customer->HoTenKhachHang = $request->HoTenKhachHang;
+        $customer->CMND = $request->CMND;
+        $customer->GioiTinh = $request->GioiTinh;
+        $customer->DiaChi = $request->DiaChi;
+        $customer->DienThoai = $request->DienThoai;
+        $customer->QuocTich = $request->QuocTich;
+
+        // $customer->TrangThai = $request->TrangThai;
+        $customer->save();
+        return response()->json($customer);
     }
 
     /**
@@ -70,7 +81,18 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $customer->TenKhach = $request->MaPhong;
+        $customer->HoTenKhachHang = $request->HoTenKhachHang;
+        $customer->CMND = $request->CMND;
+        $customer->GioiTinh = $request->GioiTinh;
+        $customer->DiaChi = $request->DiaChi;
+        $customer->DienThoai = $request->DienThoai;
+        $customer->QuocTich = $request->QuocTich;
+
+        // $customer->TrangThai = $request->TrangThai;
+        $customer->save();
+        return response()->json($customer);
     }
 
     /**
@@ -81,6 +103,16 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customers = Customer::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $customers = Customer::where('TenKhachHang','like','%'.$req->key.'%')
+        ->orWhere('DiaChi','like','%'.$req->key.'%')->get();
+        $html = view('admin.customer.search',compact('customers'))->render();
+        return response($html); 
     }
 }

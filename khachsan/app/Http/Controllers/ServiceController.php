@@ -36,7 +36,13 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new Service();
+        $service->MaLoaiDichVu = $request->MaLoaiDichVu;
+        $service->MaDonVi = $request->MaDonVi;
+        $service->DonGia = $request->DonGia;
+        $service->save();
+        return response()->json($service);
+        
     }
 
     /**
@@ -58,7 +64,7 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -70,8 +76,15 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::findOrFail($id);
+        $service->MaLoaiDichVu = $request->MaLoaiDichVu;
+        $service->MaDonVi = $request->MaDonVi;
+        $service->DonGia = $request->DonGia;
+        
+        $service->save();
+        return response()->json($service);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -81,6 +94,16 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $services = Service::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $services = Service::where('MaLoaiDichVu','like','%'.$req->key.'%')
+        ->orWhere('MaDonVi','like','%'.$req->key.'%')->get();
+        $html = view('admin.service.search',compact('services'))->render();
+        return response($html); 
     }
 }

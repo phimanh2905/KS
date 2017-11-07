@@ -36,7 +36,12 @@ class ServiceusagelistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $serviceusagelist = new Serviceusagelist();
+        $serviceusagelist->MaDichVu = $request->MaDichVu;
+        $serviceusagelist->MaNhanPhong = $request->MaNhanPhong;
+        $serviceusagelist->SoLuong = $request->SoLuong;
+        $serviceusagelist->save();
+        return response()->json($serviceusagelist);
     }
 
     /**
@@ -70,7 +75,13 @@ class ServiceusagelistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $serviceusagelist = Serviceusagelist::findOrFail($id);
+        $serviceusagelist->MaDichVu = $request->MaDichVu;
+        $serviceusagelist->MaNhanPhong = $request->MaNhanPhong;
+        $serviceusagelist->SoLuong = $request->SoLuong;
+        
+        $serviceusagelist->save();
+        return response()->json($serviceusagelist);
     }
 
     /**
@@ -81,6 +92,16 @@ class ServiceusagelistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $serviceusagelists = Serviceusagelist::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $serviceusagelists = Serviceusagelist::where('MaDichVu','like','%'.$req->key.'%')
+        ->orWhere('MaNhanPhong','like','%'.$req->key.'%')->get();
+        $html = view('admin.serviceusagelist.search',compact('serviceusagelists'))->render();
+        return response($html); 
     }
 }

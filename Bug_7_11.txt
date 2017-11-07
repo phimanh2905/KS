@@ -1,14 +1,14 @@
 ko fill du du lieu
-1. billdetail
-2. checkindetail
-3. serviceusagelist
-4. service
-5. bill
-6. roomtype
-7. checkin
-8. room
-9. Regulations
+1. billdetail-----ok
+2. checkindetail-----ok
+3. serviceusagelist-----ok
+4. service-----ok
+5. bill-----ok
+6. roomtype-----ok
+7. checkin-----ok
+8. room-----ok
+9. Regulations-----ok
 
 loi khac
-1. roomreservationdetail
+1. roomreservationdetail-----ok
 2. statusroomtype

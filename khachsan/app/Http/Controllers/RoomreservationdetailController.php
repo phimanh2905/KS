@@ -36,8 +36,14 @@ class RoomreservationdetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+       $roomreservationdetail = new Roomreservationdetail();
+       $roomreservationdetail->MaPhong = $request->MaPhong;
+       $roomreservationdetail->NgayDangKi = $request->NgayDangKi;
+       $roomreservationdetail->NgayNhan = $request->NgayNhan;
+        // $roomreservationdetail->TrangThai = $request->TrangThai;
+       $roomreservationdetail->save();
+       return response()->json($roomreservationdetail);
+   }
 
     /**
      * Display the specified resource.
@@ -70,7 +76,13 @@ class RoomreservationdetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $roomreservationdetail = Roomreservationdetail::findOrFail($id);
+        $roomreservationdetail->MaPhong = $request->MaPhong;
+        $roomreservationdetail->NgayDangKi = $request->NgayDangKi;
+        $roomreservationdetail->NgayNhan = $request->NgayNhan;
+        // $roomreservationdetail->TrangThai = $request->TrangThai;
+        $roomreservationdetail->save();
+        return response()->json($roomreservationdetail);
     }
 
     /**
@@ -81,6 +93,15 @@ class RoomreservationdetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $roomreservationdetails = Roomreservationdetail::find($request->id)->delete();
+        return response()->json();
+    }
+
+    public function search(Request $req) {
+        $result = '';
+        $roomreservationdetails = Roomreservationdetail::where('MaPhong','like','%'.$req->key.'%')
+        ->orWhere('NgayDangKi','like','%'.$req->key.'%')->get();
+        $html = view('admin.roomreservationdetail.search',compact('roomreservationdetails'))->render();
+        return response($html); 
     }
 }

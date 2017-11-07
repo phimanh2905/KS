@@ -36,7 +36,13 @@ class CheckoutpolicyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checkoutpolicy = new Checkoutpolicy();
+        $checkoutpolicy->ThoiGianQuyDinh = $request->ThoiGianQuyDinh;
+        $checkoutpolicy->PhuThu = $request->PhuThu;
+        
+        // $checkoutpolicy->TrangThai = $request->TrangThai;
+        $checkoutpolicy->save();
+        return response()->json($checkoutpolicy);
     }
 
     /**
@@ -70,7 +76,13 @@ class CheckoutpolicyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $checkoutpolicy = Checkoutpolicy::findOrFail($id);
+        $checkoutpolicy->ThoiGianQuyDinh = $request->ThoiGianQuyDinh;
+        $checkoutpolicy->PhuThu = $request->PhuThu;
+        
+        // $checkoutpolicy->TrangThai = $request->TrangThai;
+        $checkoutpolicy->save();
+        return response()->json($checkoutpolicy);
     }
 
     /**
@@ -81,6 +93,16 @@ class CheckoutpolicyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $checkoutpolicys = Checkoutpolicy::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $checkoutpolicys = Checkoutpolicy::where('MaPhong','like','%'.$req->key.'%')
+        ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+        $html = view('admin.checkoutpolicy.search',compact('checkoutpolicys'))->render();
+        return response($html); 
     }
 }

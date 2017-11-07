@@ -36,7 +36,17 @@ class CheckindetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checkindetail = new Checkindetail();
+        $checkindetail->MaPhong = $request->MaPhong;
+        $checkindetail->HoTenKhachHang = $request->HoTenKhachHang;
+        $checkindetail->CMND = $request->CMND;
+        $checkindetail->NgayNhan = $request->NgayNhan;
+        $checkindetail->NgayTraDuKien = $request->NgayTraDuKien;
+        $checkindetail->NgayTraThucTe = $request->NgayTraThucTe;
+        
+        // $checkindetail->TrangThai = $request->TrangThai;
+        $checkindetail->save();
+        return response()->json($checkindetail);
     }
 
     /**
@@ -70,7 +80,17 @@ class CheckindetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $checkindetail = Checkindetail::findOrFail($id);
+        $checkindetail->MaPhong = $request->MaPhong;
+        $checkindetail->HoTenKhachHang = $request->HoTenKhachHang;
+        $checkindetail->CMND = $request->CMND;
+        $checkindetail->NgayNhan = $request->NgayNhan;
+        $checkindetail->NgayTraDuKien = $request->NgayTraDuKien;
+        $checkindetail->NgayTraThucTe = $request->NgayTraThucTe;
+        
+        // $checkindetail->TrangThai = $request->TrangThai;
+        $checkindetail->save();
+        return response()->json($checkindetail);
     }
 
     /**
@@ -81,6 +101,16 @@ class CheckindetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $checkindetails = Checkindetail::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $checkindetails = Checkindetail::where('MaPhong','like','%'.$req->key.'%')
+        ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+        $html = view('admin.checkindetail.search',compact('checkindetails'))->render();
+        return response($html); 
     }
 }

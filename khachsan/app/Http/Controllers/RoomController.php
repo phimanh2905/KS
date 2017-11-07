@@ -36,7 +36,13 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $room = new Room();
+        $room->MaLoaiPhong = $request->MaLoaiPhong;
+        $room->MaLoaiTinhTrangPhong = $request->MaLoaiTinhTrangPhong;
+        $room->GhiChu = $request->GhiChu;
+        // $room->TrangThai = $request->TrangThai;
+        $room->save();
+        return response()->json($room);
     }
 
     /**
@@ -70,7 +76,13 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $room = Room::findOrFail($id);
+        $room->MaLoaiPhong = $request->MaLoaiPhong;
+        $room->MaLoaiTinhTrangPhong = $request->MaLoaiTinhTrangPhong;
+        $room->GhiChu = $request->GhiChu;
+        // $room->TrangThai = $request->TrangThai;
+        $room->save();
+        return response()->json($room);
     }
 
     /**
@@ -81,6 +93,15 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rooms = Room::find($request->id)->delete();
+        return response()->json();
+    }
+
+    public function search(Request $req) {
+        $result = '';
+        $rooms = Room::where('MaLoaiPhong','like','%'.$req->key.'%')
+        ->orWhere('MaLoaiTinhTrangPhong','like','%'.$req->key.'%')->get();
+        $html = view('admin.room.search',compact('rooms'))->render();
+        return response($html); 
     }
 }

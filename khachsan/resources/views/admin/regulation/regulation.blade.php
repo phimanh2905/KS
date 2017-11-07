@@ -1,12 +1,12 @@
 @extends('admin.master')
 @section('content')
 <div id="page-wrapper">
-    @if (count($services) > 0)
+    @if (count($regulations) > 0)
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Danh sách dịch vụ
+                    Danh sách khách hàng
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -25,21 +25,20 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Mã loại dịch vụ</th>
-                                    <th>Mã đơn vị</th>
-                                    <th>Đơn giá</th>
-                                   <!--  <th>Trạng thái</th> -->
+                                    <th>Tên quy định</th>
+                                    <th>Mô tả</th>
+                                    <!-- <th>Trạng thái</th> -->
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($services as $service)
-                                <tr class="service{{$service->id}}" style="text-align:center;">
-                                    <td>{{$service->id}}</td>
-                                    <td>{{$service->MaLoaiDichVu}}</td>
-                                    <td>{{$service->MaDonVi}}</td>
-                                    <td>{{$service->DonGia}}</td>
+                                @foreach($regulations as $regulation)
+                                <tr class="regulation{{$regulation->id}}" style="text-align:center;">
+                                    <td>{{$regulation->id}}</td>
+                                    <td>{{$regulation->TenQuyDinh}}</td>
+                                    <td>{{$regulation->MoTa}}</td>
+                                    
                                     <!-- <td>
                                         <button class="btn btn-success btn-circle" type="button">
                                             <i class="fa fa-check"></i>
@@ -49,11 +48,11 @@
                                         </button>
                                     </td> -->
                                     <td>
-                                        <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$service->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
+                                        <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$regulation->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
                                     <td>
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['service.destroy',$service->id]]) !!}
-                                        <button class="btn btn-danger deleteValue" type="submit" value="{{$service->id}}"><i class="fa fa-trash-o" ></i> Xóa</button>
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['regulation.destroy',$regulation->id]]) !!}
+                                        <button class="btn btn-danger deleteValue" type="submit" value="{{$regulation->id}}"><i class="fa fa-trash-o" ></i> Xóa</button>
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
@@ -97,7 +96,7 @@
             var SoLuong = $('#SoLuong').val();
             if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
                 $.ajax({
-                    url : '/service',
+                    url : '/regulation',
                     dataType : 'json',
                     type : 'POST',
                     data : {
@@ -108,7 +107,7 @@
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='service" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='regulation" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -140,7 +139,7 @@
                     type : 'PUT',
 
                     // router
-                    url : '/service/'+id,
+                    url : '/regulation/'+id,
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
@@ -151,8 +150,8 @@
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
-                   $(".service"+id).replaceWith(
-                    ("<tr class='service" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                   $(".regulation"+id).replaceWith(
+                    ("<tr class='regulation" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -165,13 +164,13 @@
             var id = $(this).val();
             $.ajax({
                 type : 'Xóa',
-                url : '/service/'+id,
+                url : '/regulation/'+id,
                 data : {
                     _token: $('input[name=_token]').val(),
                     id : id
                 }
             }).done(function(data) {
-                $("tr.service"+id).remove();
+                $("tr.regulation"+id).remove();
             })
         });
 
@@ -202,22 +201,22 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['service.update',$service->id]]) !!}
+               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['regulations.update',$regulations->id]]) !!}
                <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
             <div>
-                <label for="label">Mã loại dịch vụ</label>
-                <input type="text" name="MaLoaiDichVu" class="form-control" id="MaLoaiDichVu">
+                <label for="label"></label>
+                <input type="text" name="" class="form-control" id="">
             </div>
             <div>
-                <label for="label">Mã đơn vị</label>
-                <input type="text" name="MaDonVi" class="form-control" id="MaDonVi">
+                <label for="label"></label>
+                <input type="text" name="" class="form-control" id="">
             </div>
             <div>
-                <label for="label">Đơn giá</label>
-                <input type="text" name="DonGia" class="form-control" id="DonGia">
+                <label for="label"></label>
+                <input type="text" name="" class="form-control" id="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

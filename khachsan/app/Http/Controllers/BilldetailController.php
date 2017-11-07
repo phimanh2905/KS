@@ -36,7 +36,20 @@ class BilldetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $billdetail = new Billdetail();
+        $billdetail->MaPhong = $request->MaPhong;
+        $billdetail->MaSuDungDichVu = $request->MaSuDungDichVu;
+        $billdetail->MaChinhSach = $request->MaChinhSach;
+        $billdetail->PhuThu = $request->PhuThu;
+        $billdetail->TienPhong = $request->TienPhong;
+        $billdetail->TienDichVu = $request->TienDichVu;
+        $billdetail->GiamGiaKhachHang = $request->GiamGiaKhachHang;
+        $billdetail->HinhThucThanhToan = $request->HinhThucThanhToan;
+        $billdetail->SoNgay = $request->SoNgay;
+        $billdetail->ThanhTien = $request->ThanhTien;
+        // $Billdetail->TrangThai = $request->TrangThai;
+        $billdetail->save();
+        return response()->json($billdetail);
     }
 
     /**
@@ -70,7 +83,19 @@ class BilldetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $billdetail = Billdetail::findOrFail($id);
+        $billdetail->MaPhong = $request->MaPhong;
+        $billdetail->MaSuDungDichVu = $request->MaSuDungDichVu;
+        $billdetail->MaChinhSach = $request->MaChinhSach;
+        $billdetail->PhuThu = $request->PhuThu;
+        $billdetail->TienPhong = $request->TienPhong;
+        $billdetail->TienDichVu = $request->TienDichVu;
+        $billdetail->GiamGiaKhachHang = $request->GiamGiaKhachHang;
+        $billdetail->HinhThucThanhToan = $request->HinhThucThanhToan;
+        $billdetail->SoNgay = $request->SoNgay;
+        $billdetail->ThanhTien = $request->ThanhTien;
+        $billdetail->save();
+        return response()->json($billdetail);
     }
 
     /**
@@ -81,6 +106,16 @@ class BilldetailController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+     $billdetails = Billdetail::find($request->id)->delete();
+     return response()->json();
+ }
+
+   // tim kiem theo nhan vien lap va ma khach hang
+ public function search(Request $req) {
+    $result = '';
+    $billdetails = Billdetail::where('MaPhong','like','%'.$req->key.'%')
+    ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+    $html = view('admin.billdetail.search',compact('billdetails'))->render();
+    return response($html); 
+}
 }

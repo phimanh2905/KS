@@ -36,7 +36,8 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $unit = new Unit();
+        $unit->TenDonVi = $request->TenDonVi;
     }
 
     /**
@@ -70,7 +71,8 @@ class UnitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        $unit->TenDonVi = $request->TenDonVi;
     }
 
     /**
@@ -81,6 +83,16 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $units = Unit::find($request->id)->delete();
+        return response()->json();
+    }
+
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $units = Unit::where('TenDonVi','like','%'.$req->key.'%')
+        ->get();
+        $html = view('admin.unit.search',compact('units'))->render();
+        return response($html); 
     }
 }

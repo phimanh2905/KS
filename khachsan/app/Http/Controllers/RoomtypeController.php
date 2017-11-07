@@ -36,7 +36,15 @@ class RoomtypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $roomtype = new Roomtype();
+        $roomtype->TenLoaiPhong = $request->TenLoaiPhong;
+        $roomtype->DonGia = $request->DonGia;
+        $roomtype->SoNguoiChuan = $request->SoNguoiChuan;
+        $roomtype->SoNguoiToiDa = $request->SoNguoiToiDa;
+        $roomtype->TyLeTang = $request->TyLeTang;
+        $billdetail->save();
+        return response()->json($billdetail);
+        
     }
 
     /**
@@ -70,7 +78,15 @@ class RoomtypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $roomtype = Roomtype::findOrFail($id);
+        $roomtype->TenLoaiPhong = $request->TenLoaiPhong;
+        $roomtype->DonGia = $request->DonGia;
+        $roomtype->SoNguoiChuan = $request->SoNguoiChuan;
+        $roomtype->SoNguoiToiDa = $request->SoNguoiToiDa;
+        $roomtype->TyLeTang = $request->TyLeTang;
+        $billdetail->save();
+        return response()->json($billdetail);
+        
     }
 
     /**
@@ -81,6 +97,16 @@ class RoomtypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $roomtypes = Roomtype::find($request->id)->delete();
+        return response()->json();
+    }
+    
+    // tim kiem theo nhan vien lap va ma khach hang
+    public function search(Request $req) {
+        $result = '';
+        $roomtypes = Roomtype::where('TenLoaiPhong','like','%'.$req->key.'%')
+        ->orWhere('DonGia','like','%'.$req->key.'%')->get();
+        $html = view('admin.roomtype.search',compact('roomtypes'))->render();
+        return response($html); 
     }
 }

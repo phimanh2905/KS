@@ -222,58 +222,101 @@
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="input-group custom-search-form">
-                        <button class="btn btn-default" type="button">
-                            <span onclick="openMenu()" class="fixed-top" id="nav-btn">&#9776;</span>
-                        </button>
-                    </div>
+            <button class="btn btn-default" type="button">
+                <span onclick="openMenu()" class="fixed-top" id="nav-btn">&#9776;</span>
+            </button>
+        </div>
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="http://localhost:8000/customer"><i class="fa fa-dashboard fa-fw"></i> Khách hàng</a>
                 </li>
+
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                    <a href="http://localhost:8000/device"><i class="fa fa-dashboard fa-fw"></i> Thiết bị</a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:8000/admin"><i class="fa fa-dashboard fa-fw"></i> Người dùng</a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:8000/checkoutpolicy"><i class="fa fa-dashboard fa-fw"></i> Chính sách trả phòng</a>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý dịch vụ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">Flot Charts</a>
+                            <a href="http://localhost:8000/service">Dịch vụ</a>
                         </li>
                         <li>
-                            <a href="morris.html">Morris.js Charts</a>
+                            <a href="http://localhost:8000/typeofservice">Loại dịch vụ</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/serviceusagelist">Danh sách sử dụng dịch vụ</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/unit">Đơn vị</a>
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
                 </li>
+
+
                 <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                </li>
-                <li>
-                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý phòng<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="panels-wells.html">Panels and Wells</a>
+                            <a href="http://localhost:8000/room">Phòng</a>
                         </li>
                         <li>
-                            <a href="buttons.html">Buttons</a>
+                            <a href="http://localhost:8000/roomtype">Loại phòng</a>
                         </li>
                         <li>
-                            <a href="notifications.html">Notifications</a>
-                        </li>
-                        <li>
-                            <a href="typography.html">Typography</a>
-                        </li>
-                        <li>
-                            <a href="icons.html"> Icons</a>
-                        </li>
-                        <li>
-                            <a href="grid.html">Grid</a>
+                            <a href="http://localhost:8000/statusroomtype">Loại tình trạng</a>
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
                 </li>
+
+
                 <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý hóa đơn<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="http://localhost:8000/bill">Hóa đơn</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/billdetail">Chi tiết hóa đơn</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý thuê phòng<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Phiếu thuê phòng--- chưa có</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/roomreservationdetail">Chi tiết phiếu thuê phòng</a>
+                        </li>
+                    </ul>
+                </li>
+                
+
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý nhận phòng<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="http://localhost:8000/checkin">Phiếu nhận phòng</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/checkindetail">Chi tiết phiếu nhận phòng</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -298,23 +341,11 @@
                                     <a href="#">Third Level Item</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-third-level -->
+                            
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="blank.html">Blank Page</a>
-                        </li>
-                        <li>
-                            <a href="login.html">Login Page</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                </li> -->
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
