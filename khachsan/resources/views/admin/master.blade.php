@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Quản Lý Khách Sạn</title>
 
     <!-- Bootstrap Core CSS -->
     <link href=" {{ asset('backend/vendor/bootstrap/css/bootstrap.min.css')}} " rel="stylesheet">
