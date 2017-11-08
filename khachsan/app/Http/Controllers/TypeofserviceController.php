@@ -38,6 +38,8 @@ class TypeofserviceController extends Controller
     {
         $typeofservice = new Typeofservice();
         $typeofservice->TenLoaiDichVu = $request->TenLoaiDichVu;
+        $typeofservice->save();
+        return response()->json($typeofservice);
     }
 
     /**
@@ -73,6 +75,8 @@ class TypeofserviceController extends Controller
     {
         $typeofservice = Typeofservice::findOrFail($id);
         $typeofservice->TenLoaiDichVu = $request->TenLoaiDichVu;
+        $typeofservice->save();
+        return response()->json($typeofservice);
     }
 
     /**

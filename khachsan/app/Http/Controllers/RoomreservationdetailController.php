@@ -38,6 +38,7 @@ class RoomreservationdetailController extends Controller
     {
        $roomreservationdetail = new Roomreservationdetail();
        $roomreservationdetail->MaPhong = $request->MaPhong;
+       $roomreservationdetail->MaKhachHang = $request->MaKhachHang;
        $roomreservationdetail->NgayDangKi = $request->NgayDangKi;
        $roomreservationdetail->NgayNhan = $request->NgayNhan;
         // $roomreservationdetail->TrangThai = $request->TrangThai;
@@ -78,6 +79,7 @@ class RoomreservationdetailController extends Controller
     {
         $roomreservationdetail = Roomreservationdetail::findOrFail($id);
         $roomreservationdetail->MaPhong = $request->MaPhong;
+        $roomreservationdetail->MaKhachHang = $request->MaKhachHang;
         $roomreservationdetail->NgayDangKi = $request->NgayDangKi;
         $roomreservationdetail->NgayNhan = $request->NgayNhan;
         // $roomreservationdetail->TrangThai = $request->TrangThai;
@@ -100,7 +102,7 @@ class RoomreservationdetailController extends Controller
     public function search(Request $req) {
         $result = '';
         $roomreservationdetails = Roomreservationdetail::where('MaPhong','like','%'.$req->key.'%')
-        ->orWhere('NgayDangKi','like','%'.$req->key.'%')->get();
+        ->orWhere('MaKhachHang','like','%'.$req->key.'%')->get();
         $html = view('admin.roomreservationdetail.search',compact('roomreservationdetails'))->render();
         return response($html); 
     }

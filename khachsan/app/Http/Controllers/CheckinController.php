@@ -93,16 +93,16 @@ class CheckinController extends Controller
      */
     public function destroy($id)
     {
-        $billdetails = Bill::find($request->id)->delete();
+        $checkin = Checkin::find($request->id)->delete();
        return response()->json();
     }
 
     // tim kiem theo nhan vien lap va ma khach hang
     public function search(Request $req) {
         $result = '';
-        $billdetails = Bill::where('MaPhong','like','%'.$req->key.'%')
-        ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
-        $html = view('admin.billdetail.search',compact('billdetails'))->render();
+        $checkin = Checkin::where('MaPhieuThue','like','%'.$req->key.'%')
+        ->orWhere('MaKhachHang','like','%'.$req->key.'%')->get();
+        $html = view('admin.checkin.search',compact('checkin'))->render();
         return response($html); 
     }
 }

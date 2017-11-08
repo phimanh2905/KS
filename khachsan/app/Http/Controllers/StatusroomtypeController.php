@@ -38,6 +38,8 @@ class StatusroomtypeController extends Controller
     {
         $statusroomtype = new Statusroomtype();
         $statusroomtype->TenLoaiTinhTrang = $request->TenLoaiTinhTrang;
+        $statusroomtype->save();
+        return response()->json($statusroomtype);
     }
 
     /**
@@ -73,6 +75,8 @@ class StatusroomtypeController extends Controller
     {
         $statusroomtype = Statusroomtype::findOrFail($id);
         $statusroomtype->TenLoaiTinhTrang = $request->TenLoaiTinhTrang;
+        $statusroomtype->save();
+        return response()->json($statusroomtype);
     }
 
     /**

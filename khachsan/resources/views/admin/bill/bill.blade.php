@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 @foreach($bills as $bill)
-                                <tr class="bill{{$bill->id}}" style="text-align:center;">
+                                <tr class="bill{{$bill->id}}" >
                                     <td>{{$bill->id}}</td>
                                     <td>{{$bill->NhanVienLap}}</td>
                                     <td>{{$bill->MaKhachHang}}</td>
@@ -87,9 +87,11 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#NhanVienLap').val('');
+            $('#MaKhachHang').val('');
+            $('#MaNhanPhong').val('');
+            $('#TongTien').val('');
+            $('#NgayLap').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -97,23 +99,27 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var NhanVienLap = $('#NhanVienLap').val();
+            var MaKhachHang = $('#MaKhachHang').val();
+            var MaNhanPhong = $('#MaNhanPhong').val();
+            var TongTien = $('#TongTien').val();
+            var NgayLap = $('#NgayLap').val();
+            if(NhanVienLap != '' && MaKhachHang != '' && MaNhanPhong != '' && TongTien != ''&& NgayLap != '') {
                 $.ajax({
                     url : '/bill',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        NhanVienLap : NhanVienLap,
+                        MaKhachHang : MaKhachHang,
+                        MaNhanPhong : MaNhanPhong,
+                        TongTien : TongTien,
+                        NgayLap : NgayLap
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='bill" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='bill" + response.id + "' ><td>" + data.id + "</td><td>" + response.NhanVienLap + "</td><td>" + response.MaKhachHang + "</td><td>" + response.MaNhanPhong + "</td><td>" + response.TongTien + "</td><td>" + response.NgayLap + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -122,24 +128,30 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var NhanVienLap = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var MaNhanPhong = $(this).parent().prev("td").prev("td").prev("td").text();
+            var TongTien = $(this).parent().prev("td").prev("td").text();
+            var NgayLap = $(this).parent().prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
-            $('#id').parent('div').show();
+            $('#NhanVienLap').val(NhanVienLap);
+            $('#MaKhachHang').val(MaKhachHang);
+            $('#MaNhanPhong').val(MaNhanPhong);
+            $('#TongTien').val(TongTien);
+            $('#NgayLap').val(NgayLap);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var MaKhachHang = $('#MaKhachHang').val();
+            var NhanVienLap = $('#NhanVienLap').val();
+            var MaNhanPhong = $('#MaNhanPhong').val();
+            var TongTien = $('#TongTien').val();
+            var NgayLap = $('#NgayLap').val();
+            if(NhanVienLap != '' && MaKhachHang != '' && MaNhanPhong != '' && TongTien != ''&& NgayLap != '') {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -149,15 +161,17 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        NhanVienLap : NhanVienLap,
+                        MaKhachHang : MaKhachHang,
+                        MaNhanPhong : MaNhanPhong,
+                        TongTien : TongTien,
+                        NgayLap : NgayLap
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".bill"+id).replaceWith(
-                    ("<tr class='bill" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='bill" + data.id + "'><td>" + data.id + "</td><td>" + data.NhanVienLap + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaNhanPhong + "</td><td>" + data.TongTien + "</td><td>" + data.NgayLap + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -199,7 +213,7 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" MaNhanPhong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

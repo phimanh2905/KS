@@ -88,9 +88,12 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#MaPhong').val('');
+            $('#HoTenKhachHang').val('');
+            $('#CMND').val('');
+            $('#NgayNhan').val('');
+            $('#NgayTraDuKien').val('');
+            $('#NgayTraThucTe').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -98,23 +101,29 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var MaPhong = $('#MaPhong').val();
+            var HoTenKhachHang = $('#HoTenKhachHang').val();
+            var CMND = $('#CMND').val();
+            var NgayNhan = $('#NgayNhan').val();
+            var NgayTraDuKien = $('#NgayTraDuKien').val();
+            var NgayTraThucTe = $('#NgayTraThucTe').val();
+            if(MaPhong != '' && HoTenKhachHang != '' && CMND != '' && NgayNhan != '' && NgayTraDuKien != '' && NgayTraThucTe != '') {
                 $.ajax({
                     url : '/checkindetail',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        MaPhong : MaPhong,
+                        HoTenKhachHang : HoTenKhachHang,
+                        CMND : CMND,
+                        NgayNhan : NgayNhan,
+                        NgayTraDuKien : NgayTraDuKien,
+                        NgayTraThucTe : NgayTraThucTe
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='checkindetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='checkindetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhong + "</td><td>" + response.HoTenKhachHang + "</td><td>" + response.CMND + "</td><td>" + response.NgayNhan + "</td><td>" + response.NgayTraThucTe + "</td><td>" + response.NgayTraThucTe + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -123,13 +132,19 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var HoTenKhachHang = $(this).parent().prev("td").prev("td").prev("td").text();
+            var CMND = $(this).parent().prev("td").prev("td").text();
+            var NgayNhan = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var NgayTraDuKien = $(this).parent().prev("td").prev("td").prev("td").text();
+            var NgayTraThucTe = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
+            $('#MaPhong').val(MaPhong);
+            $('#HoTenKhachHang').val(HoTenKhachHang);
+            $('#CMND').val(CMND);
+            $('#NgayNhan').val('');
+            $('#NgayTraDuKien').val('');
+            $('#NgayTraThucTe').val('');
             $('#id').parent('div').show();
             $('.createValue').hide();
             $('.updateValue').show();
@@ -137,10 +152,13 @@
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var HoTenKhachHang = $('#HoTenKhachHang').val();
+            var MaPhong = $('#MaPhong').val();
+            var CMND = $('#CMND').val();
+            var NgayNhan = $('#NgayNhan').val();
+            var NgayTraDuKien = $('#NgayTraDuKien').val();
+            var NgayTraThucTe = $('#NgayTraThucTe').val();
+            if(MaPhong != '' && HoTenKhachHang != '' && CMND != '' && NgayNhan != '' && NgayTraDuKien != '' && NgayTraThucTe != '') {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -150,15 +168,18 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        MaPhong : MaPhong,
+                        HoTenKhachHang : HoTenKhachHang,
+                        CMND : CMND,
+                        NgayNhan : NgayNhan,
+                        NgayTraDuKien : NgayTraDuKien,
+                        NgayTraThucTe : NgayTraThucTe
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".checkindetail"+id).replaceWith(
-                    ("<tr class='checkindetail" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='checkindetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.HoTenKhachHang + "</td><td>" + data.CMND + "</td><td>" + response.NgayNhan + "</td><td>" + response.NgayTraThucTe + "</td><td>" + response.NgayTraThucTe + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -200,7 +221,7 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" CMND="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -218,8 +239,8 @@
                 <input type="text" name="MaPhong" class="form-control" id="MaPhong">
             </div>
             <div>
-                <label for="label">Hỗ trợ khách hàng</label>
-                <input type="text" name="HoTroKhachHang" class="form-control" id="HoTroKhachHang">
+                <label for="label">Họ tên khách hàng</label>
+                <input type="text" name="HoTenKhachHang" class="form-control" id="HoTenKhachHang">
             </div>
             <div>
                 <label for="label">CMND</label>

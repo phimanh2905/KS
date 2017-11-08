@@ -38,6 +38,8 @@ class UnitController extends Controller
     {
         $unit = new Unit();
         $unit->TenDonVi = $request->TenDonVi;
+        $unit->save();
+        return response()->json($unit);
     }
 
     /**
@@ -73,6 +75,8 @@ class UnitController extends Controller
     {
         $unit = Unit::findOrFail($id);
         $unit->TenDonVi = $request->TenDonVi;
+        $unit->save();
+        return response()->json($unit);
     }
 
     /**

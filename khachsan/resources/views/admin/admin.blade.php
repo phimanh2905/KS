@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
-                                Add User
+                                Add user
                             </button>
                         </div>
                         <div class="col-lg-6">
@@ -24,36 +24,25 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
+                            <thead >
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Tên người dùng</th>
                                     <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Quyền</th>
+                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
                                 </tr>
                             </thead>
-                            <tbody style="text-align:center;">
+                            <tbody >
                                 @foreach($users as $user)
                                 <tr class="user{{$user->id}}">
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role }}</td>
-                                    <td>
-                                        @if($user->status == 1)
-                                            <button class="btn btn-success btn-circle" type="button">
-                                                <i class="fa fa-check"></i>
-                                            </button>
-                                        @else
-                                            <button class="btn btn-danger btn-circle" type="button">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        @endif
-                                    </td>
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$user->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -132,7 +121,7 @@
         $('#name').val(name);
         $('#email').val(email);
         $('#role').val(role);
-        $('#id').parent('div').show();
+        $('#id').parent('div').hide();
         $('#password').parent('div').hide();
         $('.createValue').hide();
         $('.updateValue').show();
@@ -208,7 +197,7 @@
                 <input type="text" name="id" class="form-control" id="id">
             </div>
             <div>
-                <label for="label">Name</label>
+                <label for="label">Tên người dùng</label>
                 <input type="text" name="name" class="form-control" id="name">
             </div>
             <div>
@@ -216,17 +205,14 @@
                 <input type="email" name="email" class="form-control" id="email">
             </div>
             <div>
-                <label for="password">Password</label>
+                <label for="password">Mật khẩu</label>
                 <input type="password" name="password" class="form-control" id="password">
             </div>
             <div>
-                <label for="label">Role</label>
+                <label for="label">Quyền</label>
                 <input type="text" name="role" class="form-control" id="role">
             </div>
-            <div>
-                <label for="label">Status</label>
-                <input type="text" name="status" class="form-control" id="status">
-            </div>
+            
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary updateValue">Update</button>

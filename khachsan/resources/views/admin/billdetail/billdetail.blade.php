@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -42,7 +42,7 @@
                             </thead>
                             <tbody>
                                 @foreach($billdetails as $billdetail)
-                                <tr class="billdetail{{$billdetail->id}}" style="text-align:center;">
+                                <tr class="billdetail{{$billdetail->id}}" >
                                     <td>{{$billdetail->id}}</td>
                                     <td>{{$billdetail->MaPhong}}</td>
                                     <td>{{$billdetail->MaSuDungDichVu}}</td>
@@ -96,9 +96,16 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#MaPhong').val('');
+            $('#MaSuDungDichVu').val('');
+            $('#MaChinhSach').val('');
+            $('#PhuThu').val('');
+            $('#TienPhong').val('');
+            $('#TienDichVu').val('');
+            $('#GiamGiaKhachHang').val('');
+            $('#HinhThucThanhToan').val('');
+            $('#SoNgay').val('');
+            $('#ThanhTien').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -106,23 +113,37 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var MaPhong = $('#MaPhong').val();
+            var MaSuDungDichVu = $('#MaSuDungDichVu').val();
+            var MaChinhSach = $('#MaChinhSach').val();
+            var PhuThu = $('#PhuThu').val();
+            var TienPhong = $('#TienPhong').val();
+            var TienDichVu = $('#TienDichVu').val();
+            var GiamGiaKhachHang = $('#GiamGiaKhachHang').val();
+            var HinhThucThanhToan = $('#HinhThucThanhToan').val();
+            var SoNgay = $('#SoNgay').val();
+            var ThanhTien = $('#ThanhTien').val();
+            if(MaPhong != '' && MaSuDungDichVu != '' && MaChinhSach != '' && PhuThu != '' && TienPhong != '' && TienDichVu != '' && TienDichVu != '' && GiamGiaKhachHang != '' && HinhThucThanhToan != '' && SoNgay != '' && ThanhTien != '' ) {
                 $.ajax({
                     url : '/billdetail',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        MaPhong : MaPhong,
+                        MaSuDungDichVu : MaSuDungDichVu,
+                        MaChinhSach : MaChinhSach,
+                        PhuThu: PhuThu,
+                        TienPhong : TienPhong,
+                        TienDichVu : TienDichVu,
+                        GiamGiaKhachHang : GiamGiaKhachHang,
+                        HinhThucThanhToan : HinhThucThanhToan,
+                        SoNgay : SoNgay,
+                        ThanhTien : ThanhTien
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='billdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='billdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhong + "</td><td>" + response.MaSuDungDichVu + "</td><td>" + response.MaChinhSach + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -131,13 +152,20 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaSuDungDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaChinhSach = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var PhuThu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var TienPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var TienDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var GiamGiaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var HinhThucThanhToan = $(this).parent().prev("td").prev("td").prev("td").text();
+            var SoNgay = $(this).parent().prev("td").prev("td").text();
+            var ThanhTien = $(this).parent().prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
+            $('#MaPhong').val(MaPhong);
+            $('#MaSuDungDichVu').val(MaSuDungDichVu);
+            $('#MaChinhSach').val(MaChinhSach);
             $('#id').parent('div').show();
             $('.createValue').hide();
             $('.updateValue').show();
@@ -145,10 +173,10 @@
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var MaSuDungDichVu = $('#MaSuDungDichVu').val();
+            var MaPhong = $('#MaPhong').val();
+            var MaChinhSach = $('#MaChinhSach').val();
+            if(MaPhong != '' && MaSuDungDichVu != '' && MaChinhSach != '') {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -158,15 +186,15 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        MaPhong : MaPhong,
+                        MaSuDungDichVu : MaSuDungDichVu,
+                        MaChinhSach : MaChinhSach
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".billdetail"+id).replaceWith(
-                    ("<tr class='billdetail" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='billdetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -208,7 +236,7 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" MaChinhSach="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -227,7 +255,7 @@
             </div>
             <div>
                 <label for="label">Mã sử dụng dịch vụ</label>
-                <input type="text" name="MaSDDichVu" class="form-control" id="MaSDDichVu">
+                <input type="text" name="MaSuDungDichVu" class="form-control" id="MaSuDungDichVu">
             </div>
             <div>
                 <label for="label">Mã chính sách</label>

@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                                 @foreach($checkoutpolicys as $checkoutpolicy)
-                                <tr class="checkoutpolicy{{$checkoutpolicy->id}}" style="text-align:center;">
+                                <tr class="checkoutpolicy{{$checkoutpolicy->id}}" >
                                     <td>{{$checkoutpolicy->id}}</td>
                                     <td>{{$checkoutpolicy->ThoiGianQuyDinh}}</td>
                                     <td>{{$checkoutpolicy->PhuThu}}</td>
@@ -80,9 +80,8 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#ThoiGianQuyDinh').val('');
+            $('#PhuThu').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -90,23 +89,22 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var ThoiGianQuyDinh = $('#ThoiGianQuyDinh').val();
+            var PhuThu = $('#PhuThu').val();
+            
+            if(ThoiGianQuyDinh != '' && PhuThu != '') {
                 $.ajax({
                     url : '/checkoutpolicy',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        ThoiGianQuyDinh : ThoiGianQuyDinh,
+                        PhuThu : PhuThu,
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='checkoutpolicy" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='checkoutpolicy" + response.id + "' ><td>" + data.id + "</td><td>" + response.ThoiGianQuyDinh + "</td><td>" + response.PhuThu + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -115,24 +113,22 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var ThoiGianQuyDinh = $(this).parent().prev("td").prev("td").text();
+            var PhuThu = $(this).parent().prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
-            $('#id').parent('div').show();
+            $('#ThoiGianQuyDinh').val(ThoiGianQuyDinh);
+            $('#PhuThu').val(PhuThu);
+            
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var PhuThu = $('#PhuThu').val();
+            var ThoiGianQuyDinh = $('#ThoiGianQuyDinh').val();
+            if(ThoiGianQuyDinh != '' && PhuThu != '' ) {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -142,15 +138,14 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        ThoiGianQuyDinh : ThoiGianQuyDinh,
+                        PhuThu : PhuThu,
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".checkoutpolicy"+id).replaceWith(
-                    ("<tr class='checkoutpolicy" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='checkoutpolicy" + data.id + "'><td>" + data.id + "</td><td>" + data.ThoiGianQuyDinh + "</td><td>" + data.PhuThu + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -192,7 +187,7 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -210,7 +205,7 @@
                 <input type="text" name="ThoiGianQuyDinh" class="form-control" id="ThoiGianQuyDinh">
             </div>
             <div>
-                <label for="label">Phụ thu</label>
+                <label for="label">Phụ thu (VNĐ)</label>
                 <input type="text" name="PhuThu" class="form-control" id="PhuThu">
             </div>
             <div class="modal-footer">

@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -31,7 +31,7 @@
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
-                            <tbody style="text-align:center;">
+                            <tbody >
                                 @foreach($units as $unit)
                                 <tr class="unit{{$unit->id}}" >
                                     <td>{{$unit->id}}</td>
@@ -78,9 +78,9 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#TenDonVi').val('');
+            // $('#MaLoaiPhong').val('');
+            // $('#SoLuong').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -88,23 +88,21 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var TenDonVi = $('#TenDonVi').val();
+            // var MaLoaiPhong = $('#MaLoaiPhong').val();
+            // var SoLuong = $('#SoLuong').val();
+            if(TenDonVi != '' ) {
                 $.ajax({
                     url : '/unit',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        TenDonVi : TenDonVi
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='unit" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='unit" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenDonVi + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -113,24 +111,24 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var TenDonVi = $(this).parent().prev("td").text();
+            // var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
+            // var SoLuong = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
-            $('#id').parent('div').show();
+            $('#TenDonVi').val(TenDonVi);
+            // $('#MaLoaiPhong').val(MaLoaiPhong);
+            // $('#SoLuong').val(SoLuong);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            // var MaLoaiPhong = $('#MaLoaiPhong').val();
+            var TenDonVi = $('#TenDonVi').val();
+            // var SoLuong = $('#SoLuong').val();
+            if(TenDonVi != '' ) {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -140,15 +138,13 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        TenDonVi : TenDonVi
                         
                     }
                 }).done(function(data) {
                  $('#myModal').modal('hide');
                  $(".unit"+id).replaceWith(
-                    ("<tr class='unit" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='unit" + data.id + "'><td>" + data.id + "</td><td>" + data.TenDonVi + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
              })
             }

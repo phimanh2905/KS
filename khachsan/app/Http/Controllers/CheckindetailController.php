@@ -109,7 +109,7 @@ class CheckindetailController extends Controller
     public function search(Request $req) {
         $result = '';
         $checkindetails = Checkindetail::where('MaPhong','like','%'.$req->key.'%')
-        ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+        ->orWhere('HoTenKhachHang','like','%'.$req->key.'%')->get();
         $html = view('admin.checkindetail.search',compact('checkindetails'))->render();
         return response($html); 
     }

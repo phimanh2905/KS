@@ -8,6 +8,6 @@ class ServiceUsageList extends Model
 {
     //
     protected $table = "danh_sach_su_dung_dich_vus";
-    protected $fillable = ['TenKhachHang','CMND','GioiTinh','DiaChi','DienThoai','QuocTich'];
+    protected $fillable = ['MaDichVu','MaNhanPhong','SoLuong'];
     // protected $hidden = ['',''];
 }

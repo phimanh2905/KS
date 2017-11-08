@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;" >
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -35,7 +35,7 @@
                             </thead>
                             <tbody>
                                 @foreach($services as $service)
-                                <tr class="service{{$service->id}}" style="text-align:center;">
+                                <tr class="service{{$service->id}}" >
                                     <td>{{$service->id}}</td>
                                     <td>{{$service->MaLoaiDichVu}}</td>
                                     <td>{{$service->MaDonVi}}</td>
@@ -82,9 +82,9 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#MaLoaiDichVu').val('');
+            $('#MaDonVi').val('');
+            $('#DonGia').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -92,23 +92,23 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var MaLoaiDichVu = $('#MaLoaiDichVu').val();
+            var MaDonVi = $('#MaDonVi').val();
+            var DonGia = $('#DonGia').val();
+            if(MaLoaiDichVu != '' && MaDonVi != '' && DonGia != '') {
                 $.ajax({
                     url : '/service',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        MaLoaiDichVu : MaLoaiDichVu,
+                        MaDonVi : MaDonVi,
+                        DonGia : DonGia
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='service" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='service" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaLoaiDichVu + "</td><td>" + response.MaDonVi + "</td><td>" + response.DonGia + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -117,24 +117,24 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var MaLoaiDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var MaDonVi = $(this).parent().prev("td").prev("td").prev("td").text();
+            var DonGia = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
-            $('#id').parent('div').show();
+            $('#MaLoaiDichVu').val(MaLoaiDichVu);
+            $('#MaDonVi').val(MaDonVi);
+            $('#DonGia').val(DonGia);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var MaDonVi = $('#MaDonVi').val();
+            var MaLoaiDichVu = $('#MaLoaiDichVu').val();
+            var DonGia = $('#DonGia').val();
+            if(MaLoaiDichVu != '' && MaDonVi != '' && DonGia != '') {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -144,15 +144,15 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        MaLoaiDichVu : MaLoaiDichVu,
+                        MaDonVi : MaDonVi,
+                        DonGia : DonGia
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".service"+id).replaceWith(
-                    ("<tr class='service" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='service" + data.id + "'><td>" + data.id + "</td><td>" + data.MaLoaiDichVu + "</td><td>" + data.MaDonVi + "</td><td>" + data.DonGia + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -194,7 +194,7 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" DonGia="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -216,7 +216,7 @@
                 <input type="text" name="MaDonVi" class="form-control" id="MaDonVi">
             </div>
             <div>
-                <label for="label">Đơn giá</label>
+                <label for="label">Đơn giá (VNĐ)</label>
                 <input type="text" name="DonGia" class="form-control" id="DonGia">
             </div>
             <div class="modal-footer">

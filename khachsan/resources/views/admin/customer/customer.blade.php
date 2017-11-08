@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover " style="text-align:center;" >
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -41,7 +41,7 @@
                             </thead>
                             <tbody>
                                 @foreach($customers as $customer)
-                                <tr class="customer{{$customer->id}}" style="text-align:center;">
+                                <tr class="customer{{$customer->id}}" >
                                     <td>{{$customer->id}}</td>
                                     <td>{{$customer->TenKhachHang}}</td>
                                     <td>{{$customer->CMND}}</td>
@@ -73,11 +73,6 @@
                     
                     <!-- /.table-responsive -->
 
-                    <div style="float:right;padding:20px 0px 0px 0px;">
-                       <button type="button" class="btn btn-primary">Thêm</button>
-                       <button type="button" class="btn btn-primary">Sửa</button>
-                       <button type="button" class="btn btn-primary">Xóa</button>
-                   </div>
                </div>
                <!-- /.panel-body -->
            </div>
@@ -131,7 +126,7 @@
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='customer" + response.id + "'><td>" + data.id + "</td><td>" + response.TenKhachHang + "</td><td>" + response.CMND + "</td><td>" + response.GioiTinh + "</td><td>" + response.DiaChi + "</td><td>" + response.DienThoai + "</td><td>" + response.QuocTich + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Edit</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Delete</button></td></tr>");
+                    $('tbody tr').append("<tr class='customer" + response.id + "'><td>" + data.id + "</td><td>" + response.TenKhachHang + "</td><td>" + response.CMND + "</td><td>" + response.GioiTinh + "</td><td>" + response.DiaChi + "</td><td>" + response.DienThoai + "</td><td>" + response.QuocTich + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Edit</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Delete</button></td></tr>");
                 });
             }
         });

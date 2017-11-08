@@ -37,8 +37,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $customer = new Customer();
-        $customer->TenKhach = $request->MaPhong;
-        $customer->HoTenKhachHang = $request->HoTenKhachHang;
+        $customer->TenKhachHang = $request->TenKhachHang;
         $customer->CMND = $request->CMND;
         $customer->GioiTinh = $request->GioiTinh;
         $customer->DiaChi = $request->DiaChi;
@@ -82,8 +81,7 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $customer = Customer::findOrFail($id);
-        $customer->TenKhach = $request->MaPhong;
-        $customer->HoTenKhachHang = $request->HoTenKhachHang;
+        $customer->TenKhachHang = $request->TenKhachHang;
         $customer->CMND = $request->CMND;
         $customer->GioiTinh = $request->GioiTinh;
         $customer->DiaChi = $request->DiaChi;

@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 @foreach($roomtypes as $roomtype)
-                                <tr class="roomtype{{$roomtype->id}}" style="text-align:center;">
+                                <tr class="roomtype{{$roomtype->id}}" >
                                     <td>{{$roomtype->id}}</td>
                                     <td>{{$roomtype->TenLoaiPhong}}</td>
                                     <td>{{$roomtype->DonGia}}</td>
@@ -86,9 +86,11 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
-            $('#TenThietBi').val('');
-            $('#MaLoaiPhong').val('');
-            $('#SoLuong').val('');
+            $('#TenLoaiPhong').val('');
+            $('#DonGia').val('');
+            $('#SoNguoiChuan').val('');
+            $('#SoNguoiToiDa').val('');
+            $('#TyLeTang').val('');
             $('#password').parent('div').show();
             $('#id').parent('div').hide();
             $('.createValue').show();
@@ -96,23 +98,27 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
-            var TenThietBi = $('#TenThietBi').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var TenLoaiPhong = $('#TenLoaiPhong').val();
+            var DonGia = $('#DonGia').val();
+            var SoNguoiChuan = $('#SoNguoiChuan').val();
+            var SoNguoiToiDa = $('#SoNguoiToiDa').val();
+            var TyLeTang = $('#TyLeTang').val();
+            if(TenLoaiPhong != '' && DonGia != '' && SoNguoiChuan != ''&& SoNguoiToiDa != ''&& TyLeTang != '') {
                 $.ajax({
                     url : '/roomtype',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        TenLoaiPhong : TenLoaiPhong,
+                        DonGia : DonGia,
+                        SoNguoiChuan : SoNguoiChuan,
+                        SoNguoiToiDa : SoNguoiToiDa,
+                        TyLeTang : TyLeTang
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='roomtype" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenThietBi + "</td><td>" + response.MaLoaiPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='roomtype" + response.id + "' ><td>" + data.id + "</td><td>" + response.TenLoaiPhong + "</td><td>" + response.DonGia + "</td><td>" + response.SoNguoiChuan + "</td><td>" + response.SoNguoiToiDa + "</td><td>" + response.TyLeTang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -121,24 +127,30 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var TenLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var DonGia = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var SoNguoiChuan = $(this).parent().prev("td").prev("td").prev("td").text();
+            var SoNguoiToiDa = $(this).parent().prev("td").prev("td").text();
+            var TyLeTang = $(this).parent().prev("td").text();
             $('#id').val(id);
-            $('#TenThietBi').val(TenThietBi);
-            $('#MaLoaiPhong').val(MaLoaiPhong);
-            $('#SoLuong').val(SoLuong);
-            $('#id').parent('div').show();
+            $('#TenLoaiPhong').val(TenLoaiPhong);
+            $('#DonGia').val(DonGia);
+            $('#SoNguoiChuan').val(SoNguoiChuan);
+            $('#SoNguoiToiDa').val(SoNguoiToiDa);
+            $('#TyLeTang').val(TyLeTang);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var MaLoaiPhong = $('#MaLoaiPhong').val();
-            var TenThietBi = $('#TenThietBi').val();
-            var SoLuong = $('#SoLuong').val();
-            if(TenThietBi != '' && MaLoaiPhong != '' && SoLuong != '') {
+            var DonGia = $('#DonGia').val();
+            var TenLoaiPhong = $('#TenLoaiPhong').val();
+            var SoNguoiChuan = $('#SoNguoiChuan').val();
+            var SoNguoiToiDa = $('#SoNguoiToiDa').val();
+            var TyLeTang = $('#TyLeTang').val();
+            if(TenLoaiPhong != '' && DonGia != '' && SoNguoiChuan != '' && SoNguoiToiDa != '' && TyLeTang != '') {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -148,15 +160,17 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
-                        TenThietBi : TenThietBi,
-                        MaLoaiPhong : MaLoaiPhong,
-                        SoLuong : SoLuong
+                        TenLoaiPhong : TenLoaiPhong,
+                        DonGia : DonGia,
+                        SoNguoiChuan : SoNguoiChuan,
+                        SoNguoiToiDa : SoNguoiToiDa,
+                        TyLeTang : TyLeTang
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".roomtype"+id).replaceWith(
-                    ("<tr class='roomtype" + data.id + "'><td>" + data.id + "</td><td>" + data.TenThietBi + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='roomtype" + data.id + "'><td>" + data.id + "</td><td>" + data.TenLoaiPhong + "</td><td>" + data.DonGia + "</td><td>" + data.SoNguoiChuan + "</td><td>" + data.SoNguoiToiDa + "</td><td>" + data.TyLeTang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -198,7 +212,7 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" SoNguoiChuan="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,11 +235,11 @@
             </div>
             <div>
                 <label for="label">Số lượng người chuẩn</label>
-                <input type="text" name="SoLuongNguoiChuan" class="form-control" id="SoLuongNguoiChuan">
+                <input type="text" name="SoNguoiChuan" class="form-control" id="SoNguoiChuan">
             </div>
             <div>
                 <label for="label">Số lượng người tối đa</label>
-                <input type="text" name="SoLuongNguoiToiDa" class="form-control" id="SoLuongNguoiToiDa">
+                <input type="text" name="SoNguoiToiDa" class="form-control" id="SoNguoiToiDa">
             </div>
             <div>
                 <label for="label">Tỷ lệ tăng</label>

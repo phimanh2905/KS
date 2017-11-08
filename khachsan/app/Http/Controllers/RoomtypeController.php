@@ -42,8 +42,8 @@ class RoomtypeController extends Controller
         $roomtype->SoNguoiChuan = $request->SoNguoiChuan;
         $roomtype->SoNguoiToiDa = $request->SoNguoiToiDa;
         $roomtype->TyLeTang = $request->TyLeTang;
-        $billdetail->save();
-        return response()->json($billdetail);
+        $roomtype->save();
+        return response()->json($roomtype);
         
     }
 
@@ -84,8 +84,8 @@ class RoomtypeController extends Controller
         $roomtype->SoNguoiChuan = $request->SoNguoiChuan;
         $roomtype->SoNguoiToiDa = $request->SoNguoiToiDa;
         $roomtype->TyLeTang = $request->TyLeTang;
-        $billdetail->save();
-        return response()->json($billdetail);
+        $roomtype->save();
+        return response()->json($roomtype);
         
     }
 
