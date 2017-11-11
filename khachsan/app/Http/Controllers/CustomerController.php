@@ -99,7 +99,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $customers = Customer::find($request->id)->delete();
         return response()->json();

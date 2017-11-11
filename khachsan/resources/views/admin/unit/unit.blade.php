@@ -69,7 +69,10 @@
     </div>
     <!-- /.row -->
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@endif
+@endsection
+
+@section('script')
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -156,7 +159,7 @@
             e.preventDefault();
             var id = $(this).val();
             $.ajax({
-                type : 'Xóa',
+                type : 'DELETE',
                 url : '/unit/'+id,
                 data : {
                     _token: $('input[name=_token]').val(),
@@ -214,5 +217,4 @@
     </div>
 </div>
 </div>
-@endif
 @endsection

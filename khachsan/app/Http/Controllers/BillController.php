@@ -95,7 +95,7 @@ class BillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $bills = Bill::find($request->id)->delete();
         return response()->json();

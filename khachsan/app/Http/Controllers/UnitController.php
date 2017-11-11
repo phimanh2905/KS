@@ -85,7 +85,7 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $units = Unit::find($request->id)->delete();
         return response()->json();

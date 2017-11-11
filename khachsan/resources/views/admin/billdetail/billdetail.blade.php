@@ -87,7 +87,10 @@
     </div>
     <!-- /.row -->
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@endif
+@endsection
+@section('script')
+
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -213,11 +216,11 @@
                         
                     }
                 }).done(function(data) {
-                   $('#myModal').modal('hide');
-                   $(".billdetail"+id).replaceWith(
+                 $('#myModal').modal('hide');
+                 $(".billdetail"+id).replaceWith(
                     ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td><td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-               })
+             })
             }
         })
 
@@ -227,7 +230,7 @@
             e.preventDefault();
             var id = $(this).val();
             $.ajax({
-                type : 'Xóa',
+                type : 'DELETE',
                 url : '/billdetail/'+id,
                 data : {
                     _token: $('input[name=_token]').val(),
@@ -265,8 +268,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['billdetail.update',$billdetail->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['billdetail.update',$billdetail->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
@@ -321,5 +324,4 @@
     </div>
 </div>
 </div>
-@endif
 @endsection
