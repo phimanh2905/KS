@@ -222,9 +222,9 @@
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="input-group custom-search-form">
-            <button class="btn btn-default" type="button">
+            <!-- <button class="btn btn-default" type="button">
                 <span onclick="openMenu()" class="fixed-top" id="nav-btn">&#9776;</span>
-            </button>
+            </button> -->
         </div>
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
@@ -352,7 +352,7 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
-<script>
+<!-- <script>
     function openMenu() {
         $('#sidebar-nav navbar-collapse').css("width", "250px");
         $('.body').css("margin-left", "250px");
@@ -363,4 +363,4 @@
         $('.body').css("margin-left", "0px");
         $('#nav-btn').attr("onclick", "openMenu()");
     }
-</script>
+</script> -->

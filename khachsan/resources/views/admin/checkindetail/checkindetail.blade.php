@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -38,7 +38,7 @@
                             </thead>
                             <tbody>
                                 @foreach($checkindetails as $checkindetail)
-                                <tr class="checkindetail{{$checkindetail->id}}" style="text-align:center;">
+                                <tr class="checkindetail{{$checkindetail->id}}" >
                                     <td>{{$checkindetail->id}}</td>
                                     <td>{{$checkindetail->MaPhong}}</td>
                                     <td>{{$checkindetail->HoTenKhachHang}}</td>
@@ -208,7 +208,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/checkindetail.search',
                     type : 'GET',
                     data : {
                         key : key

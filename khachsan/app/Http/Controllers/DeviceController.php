@@ -37,7 +37,7 @@ class DeviceController extends Controller
     public function store(Request $request)
     {
         //
-        $device = new device();
+        $device = new Device();
         $device->TenThietBi = $request->TenThietBi;
         $device->MaLoaiPhong = $request->MaLoaiPhong;
         $device->SoLuong = $request->SoLuong;
@@ -77,7 +77,7 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $device = device::findOrFail($id);
+        $device = Device::findOrFail($id);
         $device->TenThietBi = $request->TenThietBi;
         $device->MaLoaiPhong = $request->MaLoaiPhong;
         $device->SoLuong = $request->SoLuong;
@@ -92,15 +92,15 @@ class DeviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $devices = device::find($request->id)->delete();
+        $devices = Device::find($request->id)->delete();
         return response()->json();
     }
 
     public function search(Request $req) {
         $result = '';
-        $devices = device::where('TenThietBi','like','%'.$req->key.'%')
+        $devices = Device::where('TenThietBi','like','%'.$req->key.'%')
         ->orWhere('MaLoaiPhong','like','%'.$req->key.'%')->get();
         $html = view('admin.device.search',compact('devices'))->render();
         return response($html); 

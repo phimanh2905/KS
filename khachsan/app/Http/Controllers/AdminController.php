@@ -41,6 +41,7 @@ class AdminController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
         return response()->json($user);

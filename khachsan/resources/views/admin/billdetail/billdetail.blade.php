@@ -143,7 +143,7 @@
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='billdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhong + "</td><td>" + response.MaSuDungDichVu + "</td><td>" + response.MaChinhSach + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    $('tbody tr').append("<tr class='billdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhong + "</td><td>" + response.MaSuDungDichVu + "</td><td>" + response.MaChinhSach + "</td><td>" + response.PhuThu + "</td><td>" + response.TienPhong + "</td><td>" + response.TienDichVu + "</td><td>" + response.GiamGiaKhachHang + "</td><td>" + response.HinhThucThanhToan + "</td><td>" + response.HinhThucThanhToan + "</td><td>" + response.SoNgay + "</td><td>" + response.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
         });
@@ -166,7 +166,14 @@
             $('#MaPhong').val(MaPhong);
             $('#MaSuDungDichVu').val(MaSuDungDichVu);
             $('#MaChinhSach').val(MaChinhSach);
-            $('#id').parent('div').show();
+            $('#PhuThu').val(PhuThu);
+            $('#TienPhong').val(TienPhong);
+            $('#TienDichVu').val(TienDichVu);
+            $('#GiamGiaKhachHang').val(GiamGiaKhachHang);
+            $('#HinhThucThanhToan').val(HinhThucThanhToan);
+            $('#SoNgay').val(SoNgay);
+            $('#ThanhTien').val(ThanhTien);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
@@ -176,7 +183,14 @@
             var MaSuDungDichVu = $('#MaSuDungDichVu').val();
             var MaPhong = $('#MaPhong').val();
             var MaChinhSach = $('#MaChinhSach').val();
-            if(MaPhong != '' && MaSuDungDichVu != '' && MaChinhSach != '') {
+            var PhuThu = $('#PhuThu').val();
+            var TienPhong = $('#TienPhong').val();
+            var TienDichVu = $('#TienDichVu').val();
+            var GiamGiaKhachHang = $('#GiamGiaKhachHang').val();
+            var HinhThucThanhToan = $('#HinhThucThanhToan').val();
+            var SoNgay = $('#SoNgay').val();
+            var ThanhTien = $('#ThanhTien').val();
+            if(MaPhong != '' && MaSuDungDichVu != '' && MaChinhSach != '' && PhuThu != '' && TienPhong != '' && TienDichVu != '' && TienDichVu != '' && GiamGiaKhachHang != '' && HinhThucThanhToan != '' && SoNgay != '' && ThanhTien != '' ) {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -188,13 +202,20 @@
                         id : id,
                         MaPhong : MaPhong,
                         MaSuDungDichVu : MaSuDungDichVu,
-                        MaChinhSach : MaChinhSach
+                        MaChinhSach : MaChinhSach,
+                        PhuThu: PhuThu,
+                        TienPhong : TienPhong,
+                        TienDichVu : TienDichVu,
+                        GiamGiaKhachHang : GiamGiaKhachHang,
+                        HinhThucThanhToan : HinhThucThanhToan,
+                        SoNgay : SoNgay,
+                        ThanhTien : ThanhTien
                         
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".billdetail"+id).replaceWith(
-                    ("<tr class='billdetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td><td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -223,7 +244,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/billdetail.search',
                     type : 'GET',
                     data : {
                         key : key

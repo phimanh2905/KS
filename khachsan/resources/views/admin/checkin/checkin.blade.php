@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                                 @foreach($checkins as $checkin)
-                                <tr class="checkin{{$checkin->id}}" style="text-align:center;">
+                                <tr class="checkin{{$checkin->id}}" >
                                     <td>{{$checkin->id}}</td>
                                     <td>{{$checkin->MaPhieuThue}}</td>
                                     <td>{{$checkin->MaKhachHang}}</td>
@@ -103,25 +103,27 @@
                         MaPhieuThue : MaPhieuThue,
                         MaKhachHang : MaKhachHang
                     }
-                }).done(function(response) {
+                })
+                .done(function(response) {
                     $('#myModal').modal('hide');
                     $('tbody tr').append("<tr class='checkin" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhieuThue + "</td><td>" + response.MaKhachHang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
+            
         });
 
         /* Sửa value - P.Manh - 5/11/17*/
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var MaPhieuThue = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").text();
+            var MaPhieuThue = $(this).parent().prev("td").prev("td").text();
+            var MaKhachHang = $(this).parent().prev("td").text();
             // var SoLuong = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#MaPhieuThue').val(MaPhieuThue);
             $('#MaKhachHang').val(MaKhachHang);
             // $('#SoLuong').val(SoLuong);
-            $('#id').parent('div').show();
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
@@ -152,6 +154,7 @@
                     );
                })
             }
+
         })
 
         // Xóa value - P.Manh - 5/11/17
@@ -177,7 +180,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/checkin.search',
                     type : 'GET',
                     data : {
                         key : key

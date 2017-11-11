@@ -181,7 +181,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/serviceusagelist.search',
                     type : 'GET',
                     data : {
                         key : key

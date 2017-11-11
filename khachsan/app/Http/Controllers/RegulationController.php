@@ -94,7 +94,7 @@ class RegulationController extends Controller
 
     public function search(Request $req) {
         $result = '';
-        $regulations = Regulation::where('TenQuiDinh','like','%'.$req->key.'%')
+        $regulations = Regulation::where('TenQuiDinh','like','%'.$req->key.'%')->orWhere('Mota','like','%'.$req->key.'%')
         ->get();
         $html = view('admin.regulation.search',compact('regulations'))->render();
         return response($html); 

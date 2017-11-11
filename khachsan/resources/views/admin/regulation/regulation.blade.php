@@ -180,7 +180,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/regulation.search',
                     type : 'GET',
                     data : {
                         key : key

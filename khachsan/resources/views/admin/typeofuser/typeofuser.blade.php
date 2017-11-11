@@ -177,7 +177,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/typeofuser.search',
                     type : 'GET',
                     data : {
                         key : key

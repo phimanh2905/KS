@@ -65,8 +65,52 @@
     </div>
     <!-- /.row -->
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update</h4>
+            </div>
+            <div class="modal-body">
+               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$user->id]]) !!}
+               <div>
+                <label for="label">ID</label>
+                <input type="text" name="id" class="form-control" id="id">
+            </div>
+            <div>
+                <label for="label">Tên người dùng</label>
+                <input type="text" name="name" class="form-control" id="name">
+            </div>
+            <div>
+                <label for="label">Email</label>
+                <input type="email" name="email" class="form-control" id="email">
+            </div>
+            <div>
+                <label for="password">Mật khẩu</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <div>
+                <label for="label">Quyền</label>
+                <input type="text" name="role" class="form-control" id="role">
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary updateValue">Update</button>
+                <button type="button" class="btn btn-primary createValue">Save</button>
+
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+</div>
+@endif
+@endsection
+@section('script')
+    <script type="text/javascript">
 
 
  $(document).ready(function() {
@@ -183,46 +227,4 @@
     });
 })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update</h4>
-            </div>
-            <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$user->id]]) !!}
-               <div>
-                <label for="label">ID</label>
-                <input type="text" name="id" class="form-control" id="id">
-            </div>
-            <div>
-                <label for="label">Tên người dùng</label>
-                <input type="text" name="name" class="form-control" id="name">
-            </div>
-            <div>
-                <label for="label">Email</label>
-                <input type="email" name="email" class="form-control" id="email">
-            </div>
-            <div>
-                <label for="password">Mật khẩu</label>
-                <input type="password" name="password" class="form-control" id="password">
-            </div>
-            <div>
-                <label for="label">Quyền</label>
-                <input type="text" name="role" class="form-control" id="role">
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary updateValue">Update</button>
-                <button type="button" class="btn btn-primary createValue">Save</button>
-
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
-</div>
-@endif
 @endsection

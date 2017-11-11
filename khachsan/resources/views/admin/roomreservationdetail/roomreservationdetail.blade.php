@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -36,7 +36,7 @@
                             </thead>
                             <tbody>
                                 @foreach($roomreservationdetails as $roomreservationdetail)
-                                <tr class="roomreservationdetail{{$roomreservationdetail->id}}" style="text-align:center;">
+                                <tr class="roomreservationdetail{{$roomreservationdetail->id}}" >
                                     <td>{{$roomreservationdetail->id}}</td>
                                     <td>{{$roomreservationdetail->MaKhachHang}}</td>
                                     <td>{{$roomreservationdetail->MaPhong}}</td>
@@ -125,13 +125,13 @@
             var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
             var MaPhong = $(this).parent().prev("td").prev("td").prev("td").text();
             var NgayDangKi = $(this).parent().prev("td").prev("td").text();
-            var NgayNhan = $(this).parent().prev("td").prev("td").text();
+            var NgayNhan = $(this).parent().prev("td").text();
             $('#id').val(id);
             $('#MaKhachHang').val(MaKhachHang);
             $('#MaPhong').val(MaPhong);
             $('#NgayDangKi').val(NgayDangKi);
-            var NgayNhan = $('#NgayNhan').val();
-            $('#id').parent('div').show();
+            $('#NgayNhan').val(NgayNhan);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
@@ -190,7 +190,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/roomreservationdetail.search',
                     type : 'GET',
                     data : {
                         key : key
@@ -225,7 +225,7 @@
                 <input type="text" name="MaPhong" class="form-control" id="MaPhong">
             </div>
             <div>
-                <label for="label">Ngày đăng ký</label>
+                <label for="label">Ngày đăng kí</label>
                 <input type="text" name="NgayDangKi" class="form-control" id="NgayDangKi">
             </div>
             <div>

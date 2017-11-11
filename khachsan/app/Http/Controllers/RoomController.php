@@ -100,7 +100,7 @@ class RoomController extends Controller
     public function search(Request $req) {
         $result = '';
         $rooms = Room::where('MaLoaiPhong','like','%'.$req->key.'%')
-        ->orWhere('MaLoaiTinhTrangPhong','like','%'.$req->key.'%')->get();
+        ->orWhere('MaLoaiTinhTrangPhong','like','%'.$req->key.'%')->orWhere('GhiChu','like','%'.$req->key.'%')->get();
         $html = view('admin.room.search',compact('rooms'))->render();
         return response($html); 
     }

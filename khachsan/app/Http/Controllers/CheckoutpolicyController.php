@@ -100,8 +100,8 @@ class CheckoutpolicyController extends Controller
     // tim kiem theo nhan vien lap va ma khach hang
     public function search(Request $req) {
         $result = '';
-        $checkoutpolicys = Checkoutpolicy::where('MaPhong','like','%'.$req->key.'%')
-        ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+        $checkoutpolicys = Checkoutpolicy::where('ThoiGianQuyDinh','like','%'.$req->key.'%')
+        ->orWhere('PhuThu','like','%'.$req->key.'%')->get();
         $html = view('admin.checkoutpolicy.search',compact('checkoutpolicys'))->render();
         return response($html); 
     }

@@ -60,9 +60,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('backend/dist/js/sb-admin-2.js')}}"></script>
-
+    @yield('script')
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    {!! Html::script('js/js.js') !!}
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({

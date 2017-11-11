@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" >
+                        <table class="table table-striped table-bordered table-hover" style="text-align:center;">
                             <thead >
                                 <tr >
                                     <th>ID</th>
@@ -33,7 +33,7 @@
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
-                            <tbody style="text-align:center;">
+                            <tbody >
                                 @foreach($devices as $device)
                                 <tr class="device{{$device->id}}">
                                     <td>{{$device->id}}</td>
@@ -56,7 +56,7 @@
                                     </td>
                                     <td>
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['device.destroy',$device->id]]) !!}
-                                        <button class="btn btn-danger deleteValue" type="submit" value="{{$device->id}}"><i class="fa fa-trash-o" ></i> Xóa</button>
+                                            <button class="btn btn-danger deleteValue" type="button" value="{{$device->id}}"><i class="fa fa-trash-o" ></i> Xóa</button>
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
@@ -76,7 +76,47 @@
     </div>
     <!-- /.row -->
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update</h4>
+            </div>
+            <div class="modal-body">
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['device.update',$device->id]]) !!}
+             <div>
+                <label for="label">ID</label>
+                <input type="text" name="id" class="form-control" id="id">
+            </div>
+            <div>
+                <label for="label">Tên thiết bị</label>
+                <input type="text" name="TenThietBi" class="form-control" id="TenThietBi">
+            </div>
+            <div>
+                <label for="label">Mã loại phòng</label>
+                <input type="text" name="MaLoaiPhong" class="form-control" id="MaLoaiPhong">
+            </div>
+            <div>
+                <label for="password">Số lượng</label>
+                <input type="text" name="SoLuong" class="form-control" id="SoLuong">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary updateValue">Update</button>
+                <button type="button" class="btn btn-primary createValue">Save</button>
+
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+</div>
+@endif
+@endsection
+@section('script')
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -164,13 +204,12 @@
         // Xóa value - P.Manh - 5/11/17
 
         $(document).on('click', '.deleteValue', function(e) {
-            e.preventDefault();
             var id = $(this).val();
             $.ajax({
-                type : 'Xóa',
+                type : 'DELETE',
                 url : '/device/'+id,
                 data : {
-                    _token: $('input[name=_token]').val(),
+                     _token: $('input[name=_token]').val(),
                     id : id
                 }
             }).done(function(data) {
@@ -184,7 +223,7 @@
             var key = $(this).val();
             setTimeout(function() {
                 $.ajax({
-                    url: '/search',
+                    url: '/device.search',
                     type : 'GET',
                     data : {
                         key : key
@@ -197,41 +236,4 @@
         });
     })
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" SoLuong="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update</h4>
-            </div>
-            <div class="modal-body">
-             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['device.update',$device->id]]) !!}
-             <div>
-                <label for="label">ID</label>
-                <input type="text" name="id" class="form-control" id="id">
-            </div>
-            <div>
-                <label for="label">Tên thiết bị</label>
-                <input type="text" name="TenThietBi" class="form-control" id="TenThietBi">
-            </div>
-            <div>
-                <label for="label">Mã loại phòng</label>
-                <input type="text" name="MaLoaiPhong" class="form-control" id="MaLoaiPhong">
-            </div>
-            <div>
-                <label for="password">Số lượng</label>
-                <input type="text" name="SoLuong" class="form-control" id="SoLuong">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary updateValue">Update</button>
-                <button type="button" class="btn btn-primary createValue">Save</button>
-
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
-</div>
-@endif
 @endsection
