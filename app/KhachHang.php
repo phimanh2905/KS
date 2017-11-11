@@ -7,13 +7,19 @@ use App\PhieuThuePhong;
 use App\PhieuNhanPhong;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class KhachHang extends Model
 {
-   protected $table = "khach_hangs";
-   
-   protected $fillable = ['TenKhachHang','CMND','GioiTinh','DiaChi','DienThoai','QuocTich'];
+    protected $table = "KhachHang";
 
-   public function hoaDons() {
+    protected $fillable = [
+    	'TenKhachHang',
+    	'CMND',
+    	'GioiTinh', 
+    	'DiaChi', 
+    	'DienThoai',
+    	'QuocTich', 
+    ];
+    public function hoaDons() {
         return $this->hasMany(HoaDon::class, 'MaKhachHang');
     }
     public function phieuThuePhongs() {

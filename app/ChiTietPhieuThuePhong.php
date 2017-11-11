@@ -6,12 +6,16 @@ use App\PhieuThuePhong;
 use App\Phong;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomReservationDetail extends Model
+class ChiTietPhieuThuePhong extends Model
 {
-    //
-    protected $table = "chi_tiet_phieu_thue_phongs";
-    protected $fillable = ['MaPhong','MaKhachHang','NgayDangKy','NgayNhan'];
-    // protected $hidden = ['',''];
+    protected $table = "DichVu";
+
+    protected $fillable = [
+    	'MaPhieuThue',
+    	'MaPhong',
+    	'NgayDangKi', 
+    	'NgayNhan'
+    ];
     public function phieuThuePhong() {
         return $this->belongsTo(PhieuThuePhong::class, 'MaPhieuThue');
     }

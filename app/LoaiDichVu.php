@@ -5,14 +5,13 @@ namespace App;
 use App\LoaiDichVu;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeOfService extends Model
+class LoaiDichVu extends Model
 {
-    //
-    protected $table = "loai_dich_vus";
-    
-    protected $fillable = ['TenLoaiDichVu'];
-    // protected $hidden = ['',''];
+    protected $table = "LoaiDichVu";
 
+    protected $fillable = [
+    	'TenLoaiDichVu', 
+    ];
     public function dichVus() {
         return $this->hasMany(LoaiDichVu::class, 'MaLoaiDichVu');
     }

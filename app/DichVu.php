@@ -7,13 +7,15 @@ use App\DichVu;
 use App\DonVi;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class DichVu extends Model
 {
-    //
-    protected $table = "dich_vus";
-    protected $fillable = ['MaLoaiDichVu','MaDonVi','DonGia'];
-    // protected $hidden = ['',''];
+    protected $table = "DichVu";
 
+    protected $fillable = [
+    	'MaLoaiDichVu',
+    	'MaDonVi',
+    	'DonGia', 
+    ];
     public function danhSachSuDungDichVus() {
         return $this->hasMany(DanhSachSuDungDichVu::class, 'MaDichVu');
     }

@@ -6,12 +6,17 @@ use App\Phong;
 use App\ThietBi;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomType extends Model
+class LoaiPhong extends Model
 {
-    //
-    protected $table = "loai_phongs";
-    protected $fillable = ['TenLoaiPhong','DonGia','SoNguoiChuan','SoNguoiToiDa','TyLeTang'];
-    // protected $hidden = ['',''];
+    protected $table = "LoaiPhong";
+
+    protected $fillable = [
+    	'TenLoaiPhong',
+    	'DonGia',
+    	'SoLuongNguoiChuan', 
+    	'SoLuongNguoiToiDa', 
+    	'TiLeTang',
+    ];
     public function phongs() {
         return $this->hasMany(Phong::class, 'MaLoaiPhong');
     }

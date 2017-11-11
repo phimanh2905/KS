@@ -5,13 +5,13 @@ namespace App;
 use App\Phong;
 use Illuminate\Database\Eloquent\Model;
 
-class StatusRoomType extends Model
+class LoaiTinhTrang extends Model
 {
-    //
-    protected $table = "loai_tinh_trangs";
-    protected $fillable = ['TenLoaiTinhTrang'];
-    // protected $hidden = ['',''];
+    protected $table = "LoaiTinhTrang";
 
+    protected $fillable = [
+    	'TenLoaiTinhTrangPhong',
+    ];
     public function phongs() {
         return $this->hasMany(Phong::class, 'MaLoaiTinhTrangPhong');
     }

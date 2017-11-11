@@ -8,14 +8,15 @@ use App\LoaiTinhTrang;
 use App\LoaiPhong;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Phong extends Model
 {
-    //
-    protected $table = "phongs";
+    protected $table = "Phong";
 
-    protected $fillable = ['MaLoaiPhong','MaLoaiTinhTrangPhong','GhiChu'];
-    // protected $hidden = ['',''];
-    
+    protected $fillable = [
+    	'MaLoaiPhong',
+    	'MaLoaiTinhTrangPhong',
+    	'GhiChu', 
+    ];
     public function chiTietPhieuThuePhongs() {
         return $this->hasMany(ChiTietPhieuThuePhong::class, 'MaPhong');
     }

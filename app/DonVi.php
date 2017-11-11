@@ -5,14 +5,13 @@ namespace App;
 use App\DichVu;
 use Illuminate\Database\Eloquent\Model;
 
-class Unit extends Model
+class DonVi extends Model
 {
-    //
-    protected $table = "don_vis";
-    
-    protected $fillable = ['TenDonVi'];
-    // protected $hidden = ['',''];
+    protected $table = "DonVi";
 
+    protected $fillable = [
+    	'TenDonVi', 
+    ];
     public function dichVus() {
         return $this->hasMany(DichVu::class, 'MaDonVi');
     }

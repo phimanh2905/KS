@@ -5,12 +5,14 @@ namespace App;
 use App\ChiTietHoaDon;
 use Illuminate\Database\Eloquent\Model;
 
-class CheckOutPolicy extends Model
+class ChinhSachTraPhong extends Model
 {
-    //
-    protected $table = "chinh_sach_tra_phongs";
-    protected $fillable = ['ThoiGianQuiDinh','PhuThu'];
-    // protected $hidden = ['',''];
+    protected $table = "ChinhSachTraPhong";
+
+    protected $fillable = [
+    	'ThoiGianQuiDinh',
+    	'PhuThu',
+    ];
     public function chiTietHoaDons () {
         return $this->hasMany(ChiTietHoaDon::class, 'MaChinhSach');
     }

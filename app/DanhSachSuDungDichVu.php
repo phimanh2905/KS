@@ -2,19 +2,20 @@
 
 namespace App;
 
-
 use App\PhieuNhanPhong;
 use App\ChiTietHoaDon;
 use App\DichVu;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceUsageList extends Model
+class DanhSachSuDungDichVu extends Model
 {
-    //
-    protected $table = "danh_sach_su_dung_dich_vus";
-    protected $fillable = ['MaDichVu','MaNhanPhong','SoLuong'];
-    // protected $hidden = ['',''];
+    protected $table = "DanhSachSuDungDichVu";
 
+    protected $fillable = [
+    	'MaDichVu',
+    	'MaNhanPhong',
+    	'SoLuong', 
+    ];
     public function phieuNhanPhong() {
         return $this->belongsTo(PhieuNhanPhong::class, 'MaNhanPhong');
     }

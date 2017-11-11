@@ -8,12 +8,15 @@ use App\KhachHang;
 use App\HoaDon;
 use Illuminate\Database\Eloquent\Model;
 
-class CheckIn extends Model
+class PhieuNhanPhong extends Model
 {
-    //
-    protected $table = "phieu_nhan_phongs";
-    protected $fillable = ['MaPhieuThue','MaKhachHang'];
-    // protected $hidden = ['',''];
+    protected $table = "PhieuNhanPhong";
+
+    protected $fillable = [
+    	'MaPhieuThue', 
+    	'MaKhachHang', 	
+    ];
+
     public function phieuThuePhong() {
         return $this->belongsTo(PhieuThuePhong::class, 'MaPhieuThue');
     }

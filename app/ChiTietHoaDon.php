@@ -8,12 +8,23 @@ use App\ChinhSachTraPhong;
 use App\Phong;
 use Illuminate\Database\Eloquent\Model;
 
-class BillDetail extends Model
+class ChiTietHoaDon extends Model
 {
-    //
-    protected $table = "chi_tiet_hoa_dons";
-    protected $fillable = ['MaPhong','MaSuDungDichVu','MaChinhSach','PhuThu','TienPhong','TienDichVu','GiamGiaKH','HinhThucThanhToan','SoNgay','ThanhTien'];
-    // protected $hidden = ['',''];
+    protected $table = "ChiTietHoaDon";
+
+    protected $fillable = [
+        'MaHoaDon',
+    	'MaPhong',
+    	'MaSuDungDichVu',
+    	'MaChinhSach',
+    	'PhuThu', 
+    	'TienPhong', 
+    	'TienDichVu',
+    	'GiamGiaKhachHang', 
+    	'HinhThucThanhToan', 
+    	'SoNgay', 
+    	'ThanhTien', 
+    ];
     public function hoaDon() {
         return $this->belongsTo(HoaDon::class, 'MaHoaDon');
     }
