@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
             $loaiPhong = RoomType::all();
             $view->with('loaiPhong', $loaiPhong);
         });
+        view()->composer('admin.room.room', function($view) {
+            $tinhTrangPhong = StatusRoomType::all();
+            $view->with('tinhTrangPhong', $tinhTrangPhong);
+        });
     }
 
     /**

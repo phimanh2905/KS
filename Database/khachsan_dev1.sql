@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2017 at 02:17 PM
+-- Generation Time: Nov 13, 2017 at 04:48 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `khachsan`
+-- Database: `khachsan_dev1`
 --
 
 -- --------------------------------------------------------
@@ -39,8 +39,11 @@ CREATE TABLE `chinh_sach_tra_phongs` (
 --
 
 INSERT INTO `chinh_sach_tra_phongs` (`id`, `ThoiGianQuyDinh`, `PhuThu`, `created_at`, `updated_at`) VALUES
-(2, '10h-12h sua', '1000000 sua', '2017-11-07 20:45:14', '2017-11-08 10:15:48'),
-(4, '1', '1', '2017-11-11 05:32:49', '2017-11-11 05:32:49');
+(1, '12h-13h', '0', NULL, NULL),
+(2, '13h-15h', '0.2', NULL, NULL),
+(3, '15h-17h', '0.4', NULL, NULL),
+(4, '17h-19h', '0.5', NULL, NULL),
+(5, 'sau 19h', '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +72,7 @@ CREATE TABLE `chi_tiet_hoa_dons` (
 --
 
 INSERT INTO `chi_tiet_hoa_dons` (`id`, `MaPhong`, `MaSuDungDichVu`, `MaChinhSach`, `PhuThu`, `TienPhong`, `TienDichVu`, `GiamGiaKhachHang`, `HinhThucThanhToan`, `SoNgay`, `ThanhTien`, `created_at`, `updated_at`) VALUES
-(3, 'mã phòng1', 'mã sử dụng dịch vụ1', 'mã chính sách1', 'phụ thu1', 'tiền phòng1', 'tiền dịch vụ1', 'giảm giá khách hàng1', 'hình thức thanh toán1', 'số ngày1', 'thành tiền1', '2017-11-08 11:15:15', '2017-11-08 18:44:40');
+(1, '201', '1', '2', '0.2', '400000', '200000', '0.1', 'Tiền mặt', '1', '540000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,7 +97,7 @@ CREATE TABLE `chi_tiet_phieu_nhan_phongs` (
 --
 
 INSERT INTO `chi_tiet_phieu_nhan_phongs` (`id`, `MaPhong`, `HoTenKhachHang`, `CMND`, `NgayNhan`, `NgayTraDuKien`, `NgayTraThucTe`, `created_at`, `updated_at`) VALUES
-(3, 'mã phòng', 'họ tên khách hàng', 'cmnd', 'ngày nhận', 'ngày trả dự kiến', 'ngày trả thực tế', '2017-11-08 18:54:57', '2017-11-08 18:54:57');
+(2, '201', 'Phí Hồng Mạnh', '123456789', '2017-10-11', '2017-10-12', '2017-10-12', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,8 +120,9 @@ CREATE TABLE `chi_tiet_phieu_thue_phongs` (
 --
 
 INSERT INTO `chi_tiet_phieu_thue_phongs` (`id`, `MaKhachHang`, `MaPhong`, `NgayDangKi`, `NgayNhan`, `created_at`, `updated_at`) VALUES
-(2, '444 a', '444a', '444a', 'a', '2017-11-08 09:07:19', '2017-11-08 18:40:30'),
-(3, 'ma khach hang1', 'ma phong1', 'ngay dang ky1', 'ngay nhan1', '2017-11-08 18:45:56', '2017-11-08 18:50:33');
+(1, '1', '201', '2017-10-10', '2017-10-11', NULL, NULL),
+(2, '1', '202', '2017-10-12', '2017-10-13', NULL, NULL),
+(3, '1', '203', '2017-10-17', '2017-10-19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -140,7 +144,7 @@ CREATE TABLE `danh_sach_su_dung_dich_vus` (
 --
 
 INSERT INTO `danh_sach_su_dung_dich_vus` (`id`, `MaDichVu`, `MaNhanPhong`, `SoLuong`, `created_at`, `updated_at`) VALUES
-(3, 'mã dịch vụ', 'mã nhận phòng', 'số lượng', '2017-11-08 10:20:16', '2017-11-08 10:21:35');
+(1, '1', '2', '2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,8 +166,12 @@ CREATE TABLE `dich_vus` (
 --
 
 INSERT INTO `dich_vus` (`id`, `MaLoaiDichVu`, `MaDonVi`, `DonGia`, `created_at`, `updated_at`) VALUES
-(2, 'GADAI', 'BO', '9000', '2017-11-07 20:54:44', '2017-11-07 20:54:44'),
-(3, '3 sua', 'quy sua', 'quy sua', '2017-11-08 00:43:38', '2017-11-08 10:16:41');
+(1, 'BH', 'Lon', '12000', NULL, NULL),
+(2, 'M', 'vé', '80000', NULL, NULL),
+(3, 'BH', 'Lon', '8000', NULL, NULL),
+(4, 'NB', 'Lon', '12000', NULL, NULL),
+(5, 'NL', 'Chai', '8000', NULL, NULL),
+(6, 'GASM', 'Cái', '100000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -183,7 +191,12 @@ CREATE TABLE `don_vis` (
 --
 
 INSERT INTO `don_vis` (`id`, `TenDonVi`, `created_at`, `updated_at`) VALUES
-(2, 'trang sua', '2017-11-07 23:21:18', '2017-11-08 10:59:00');
+(1, 'Bộ', NULL, NULL),
+(2, 'Cái', NULL, NULL),
+(3, 'Chai', NULL, NULL),
+(4, 'Giờ', NULL, NULL),
+(5, 'Lon', NULL, NULL),
+(6, 'Vé', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -207,8 +220,7 @@ CREATE TABLE `hoa_dons` (
 --
 
 INSERT INTO `hoa_dons` (`id`, `NhanVienLap`, `MaKhachHang`, `MaNhanPhong`, `TongTien`, `NgayLap`, `created_at`, `updated_at`) VALUES
-(2, 'avbcbab', 'avbcbab', 'avbcbab', 'avbcbab', 'avbcbab', '2017-11-08 01:38:45', '2017-11-08 01:38:45'),
-(3, 'nhân viên lập', 'mã khách hàng', 'mã nhận phòng', 'tổng tiền', 'ngày lập', '2017-11-08 11:10:21', '2017-11-08 11:10:21');
+(1, 'Phí Hồng Mạnh', '1', '2', '1000000', '2017-10-17', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -233,8 +245,8 @@ CREATE TABLE `khach_hangs` (
 --
 
 INSERT INTO `khach_hangs` (`id`, `TenKhachHang`, `CMND`, `GioiTinh`, `DiaChi`, `DienThoai`, `QuocTich`, `created_at`, `updated_at`) VALUES
-(2, 'phi hong manh', '1', 'nam', 'thai binh', '01636679239', 'viet nam', '2017-11-07 20:40:04', '2017-11-07 20:40:04'),
-(3, 'địa chỉ', 'điện thoại', 'quốc tịch', 'địa chỉ', 'điện thoại', 'quốc tịch', '2017-11-08 09:44:11', '2017-11-08 09:51:36');
+(1, 'Phí Hồng Mạnh', '123456789', '1', 'Tiền Hải, Thái Bình', '1234567890', 'Việt Nam', NULL, NULL),
+(2, 'abc', '123456789', '0', 'ABC', '1234567890', 'Lào', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -254,7 +266,8 @@ CREATE TABLE `loai_dich_vus` (
 --
 
 INSERT INTO `loai_dich_vus` (`id`, `TenLoaiDichVu`, `created_at`, `updated_at`) VALUES
-(2, 'gadai- giặt áo dài', '2017-11-07 21:18:52', '2017-11-07 21:18:52');
+(1, 'Bò húc', NULL, NULL),
+(6, 'Giặt áo sơ mi', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -278,9 +291,9 @@ CREATE TABLE `loai_phongs` (
 --
 
 INSERT INTO `loai_phongs` (`id`, `TenLoaiPhong`, `DonGia`, `SoNguoiChuan`, `SoNguoiToiDa`, `TyLeTang`, `created_at`, `updated_at`) VALUES
-(2, '2', '2', '2', '2', '2', '2017-11-08 00:55:17', '2017-11-08 00:55:17'),
-(3, 'tên loại phòng', 'đơn giá', 'số lượng người chuẩn', 'số lượng người tối đa', 'tỷ lệ tăng', '2017-11-08 11:03:29', '2017-11-08 11:03:29'),
-(4, '10', '10', '10', '10', '10', '2017-11-11 09:30:48', '2017-11-11 09:30:48');
+(1, 'Đặc biệt ', '720000', '2', '4', '0', NULL, NULL),
+(2, 'Loại 1', '320000', '2', '4', '0', NULL, NULL),
+(3, 'Loại 2', '270000', '2', '4', '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -300,8 +313,9 @@ CREATE TABLE `loai_tinh_trangs` (
 --
 
 INSERT INTO `loai_tinh_trangs` (`id`, `TenLoaiTinhTrang`, `created_at`, `updated_at`) VALUES
-(2, 'trống', '2017-11-08 01:19:07', '2017-11-08 01:19:07'),
-(4, 'dáda', '2017-11-08 01:20:38', '2017-11-08 01:20:38');
+(1, 'Trống', NULL, NULL),
+(2, 'Đặt trước', NULL, NULL),
+(3, 'Có người ở', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -373,11 +387,9 @@ CREATE TABLE `phieu_nhan_phongs` (
 --
 
 INSERT INTO `phieu_nhan_phongs` (`id`, `MaPhieuThue`, `MaKhachHang`, `created_at`, `updated_at`) VALUES
-(3, 'ma phieu thue1', 'ma khach hang1', '2017-11-08 18:52:24', '2017-11-08 18:52:32'),
-(4, 'phieu thue', 'khach hang', '2017-11-08 18:53:18', '2017-11-08 18:53:18'),
-(5, 'the', 'hang', '2017-11-08 19:00:38', '2017-11-08 19:00:38'),
-(6, '1', '2', '2017-11-08 19:01:40', '2017-11-08 19:01:40'),
-(7, '11', '22', '2017-11-08 19:03:11', '2017-11-08 19:03:11');
+(1, '2', '3', NULL, NULL),
+(2, '1', '1', NULL, NULL),
+(3, '3', '3', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -397,7 +409,9 @@ CREATE TABLE `phieu_thue_phongs` (
 --
 
 INSERT INTO `phieu_thue_phongs` (`id`, `MaKhachHang`, `created_at`, `updated_at`) VALUES
-(1, '1', NULL, NULL);
+(1, '1', NULL, NULL),
+(2, '2', NULL, NULL),
+(3, '3', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -419,10 +433,9 @@ CREATE TABLE `phongs` (
 --
 
 INSERT INTO `phongs` (`id`, `MaLoaiPhong`, `MaLoaiTinhTrangPhong`, `GhiChu`, `created_at`, `updated_at`) VALUES
-(8, '8 sua', '8sua', 'Ksua', '2017-11-08 01:10:36', '2017-11-08 11:02:48'),
-(9, 'mã loại phòng', 'mã loại tình trạng phòng', 'ghi chú', '2017-11-08 11:00:12', '2017-11-08 11:00:12'),
-(13, '4', '1', 'manh mnsd', '2017-11-11 09:33:25', '2017-11-11 09:33:25'),
-(14, '3', '1', '1', '2017-11-11 09:34:17', '2017-11-11 09:34:17');
+(1, '1', '3', 'Đã có người ở', NULL, NULL),
+(2, '2', '2', 'Phòng loại 2\r\nĐặt trước', NULL, NULL),
+(3, '3', '1', 'Phòng loại 2\r\nTrống', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -431,7 +444,7 @@ INSERT INTO `phongs` (`id`, `MaLoaiPhong`, `MaLoaiTinhTrangPhong`, `GhiChu`, `cr
 --
 
 CREATE TABLE `quy_dinhs` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) NOT NULL,
   `TenQuyDinh` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `MoTa` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -443,7 +456,7 @@ CREATE TABLE `quy_dinhs` (
 --
 
 INSERT INTO `quy_dinhs` (`id`, `TenQuyDinh`, `MoTa`, `created_at`, `updated_at`) VALUES
-(1, '1', '1', NULL, NULL);
+(1, 'Chính sách trả phòng', 'thời gian trả mỗi ngày là 12h', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -459,13 +472,6 @@ CREATE TABLE `tham_sos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tham_sos`
---
-
-INSERT INTO `tham_sos` (`PhieuDangKi`, `PhieuNhan`, `HoaDon`, `STT`, `created_at`, `updated_at`) VALUES
-('1', '1', '1', '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -487,7 +493,10 @@ CREATE TABLE `thiet_bis` (
 --
 
 INSERT INTO `thiet_bis` (`id`, `TenThietBi`, `MaLoaiPhong`, `SoLuong`, `created_at`, `updated_at`) VALUES
-(3, 'tên thiết bị', 'mã loại phòng', 'số lượng', '2017-11-09 00:43:48', '2017-11-09 00:43:48');
+(1, 'Bộ điều khiển máy lạnh', '1', '1', NULL, NULL),
+(2, 'Bộ điều khiển tivi', '1', '1', NULL, NULL),
+(3, 'Bộ điều khiển tivi loại 1', '2', '2', NULL, NULL),
+(4, 'Bộ điều khiển tivi loại 2', '3', '2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -500,8 +509,8 @@ CREATE TABLE `users` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -512,7 +521,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(4, '2', '2@gmail.com', '123456', '1', '', NULL, NULL, NULL);
+(1, 'Mạnh', 'phimanh@gmail.com', 'manh1234', '1', 'hoạt động', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -647,17 +656,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chinh_sach_tra_phongs`
 --
 ALTER TABLE `chinh_sach_tra_phongs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `chi_tiet_hoa_dons`
 --
 ALTER TABLE `chi_tiet_hoa_dons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `chi_tiet_phieu_nhan_phongs`
 --
 ALTER TABLE `chi_tiet_phieu_nhan_phongs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `chi_tiet_phieu_thue_phongs`
 --
@@ -667,42 +676,42 @@ ALTER TABLE `chi_tiet_phieu_thue_phongs`
 -- AUTO_INCREMENT for table `danh_sach_su_dung_dich_vus`
 --
 ALTER TABLE `danh_sach_su_dung_dich_vus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `dich_vus`
 --
 ALTER TABLE `dich_vus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `don_vis`
 --
 ALTER TABLE `don_vis`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `hoa_dons`
 --
 ALTER TABLE `hoa_dons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `khach_hangs`
 --
 ALTER TABLE `khach_hangs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `loai_dich_vus`
 --
 ALTER TABLE `loai_dich_vus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `loai_phongs`
 --
 ALTER TABLE `loai_phongs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `loai_tinh_trangs`
 --
 ALTER TABLE `loai_tinh_trangs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -712,32 +721,32 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `phieu_nhan_phongs`
 --
 ALTER TABLE `phieu_nhan_phongs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `phieu_thue_phongs`
 --
 ALTER TABLE `phieu_thue_phongs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `phongs`
 --
 ALTER TABLE `phongs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 --
 -- AUTO_INCREMENT for table `quy_dinhs`
 --
 ALTER TABLE `quy_dinhs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `thiet_bis`
 --
 ALTER TABLE `thiet_bis`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
