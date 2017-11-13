@@ -211,8 +211,14 @@
                 <input type="text" name="id" class="form-control" id="id">
             </div>
             <div>
-                <label for="label">Mã loại phòng</label>
-                <input type="text" name="MaLoaiPhong" class="form-control" id="MaLoaiPhong">
+                <label for="label">Mã loại phòng</label><!-- 
+                <input type="text" name="MaLoaiPhong" class="form-control" id="MaLoaiPhong"> -->
+                <select class="form-control" id="MaLoaiPhong" name="MaLoaiPhong">
+                    <option value="">Select</option>
+                    @foreach($loaiPhong as $l)
+                    <option value="{{ $l->id }}">{{ $l->TenLoaiPhong }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã loại tình trạng phòng</label>

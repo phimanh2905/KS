@@ -3,7 +3,7 @@
 namespace App;
 
 use App\ChiTietPhieuThuePhong;
-use App\ChiTietHoaDon;
+use App\BillDetail;
 use App\LoaiTinhTrang;
 use App\LoaiPhong;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +20,7 @@ class Room extends Model
         return $this->hasMany(ChiTietPhieuThuePhong::class, 'MaPhong');
     }
     public function chiTietHoaDons() {
-        return $this->hasMany(ChiTietHoaDon::class, 'MaPhong');
+        return $this->hasMany(BillDetail::class, 'MaPhong');
     }
     public function loaiTinhTrang() {
         return $this->belongsTo(LoaiTinhTrang::class, 'MaLoaiTinhTrangPhong');

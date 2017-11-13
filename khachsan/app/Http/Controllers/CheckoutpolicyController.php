@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Checkoutpolicy;
+use App\CheckOutPolicy;
 
 class CheckoutpolicyController extends Controller
 {
@@ -14,7 +14,7 @@ class CheckoutpolicyController extends Controller
      */
     public function index()
     {
-        $checkoutpolicys = Checkoutpolicy::all();
+        $checkoutpolicys = CheckOutPolicy::all();
         return view('admin.checkoutpolicy.checkoutpolicy',compact('checkoutpolicys'));
     }
 
@@ -36,7 +36,7 @@ class CheckoutpolicyController extends Controller
      */
     public function store(Request $request)
     {
-        $checkoutpolicy = new Checkoutpolicy();
+        $checkoutpolicy = new CheckOutPolicy();
         $checkoutpolicy->ThoiGianQuyDinh = $request->ThoiGianQuyDinh;
         $checkoutpolicy->PhuThu = $request->PhuThu;
         
@@ -76,7 +76,7 @@ class CheckoutpolicyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $checkoutpolicy = Checkoutpolicy::findOrFail($id);
+        $checkoutpolicy = CheckOutPolicy::findOrFail($id);
         $checkoutpolicy->ThoiGianQuyDinh = $request->ThoiGianQuyDinh;
         $checkoutpolicy->PhuThu = $request->PhuThu;
         
@@ -93,14 +93,14 @@ class CheckoutpolicyController extends Controller
      */
     public function destroy(Request $request)
     {
-        $checkoutpolicys = Checkoutpolicy::find($request->id)->delete();
+        $checkoutpolicys = CheckOutPolicy::find($request->id)->delete();
         return response()->json();
     }
 
     // tim kiem theo nhan vien lap va ma khach hang
     public function search(Request $req) {
         $result = '';
-        $checkoutpolicys = Checkoutpolicy::where('ThoiGianQuyDinh','like','%'.$req->key.'%')
+        $checkoutpolicys = CheckOutPolicy::where('ThoiGianQuyDinh','like','%'.$req->key.'%')
         ->orWhere('PhuThu','like','%'.$req->key.'%')->get();
         $html = view('admin.checkoutpolicy.search',compact('checkoutpolicys'))->render();
         return response($html); 
