@@ -25,6 +25,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Tên phòng</th>
                                     <th>Mã loại phòng</th>
                                     <th>Mã loại tình trạng phòng</th>
                                     <th>Ghi chú</th>
@@ -37,6 +38,7 @@
                                 @foreach($rooms as $room)
                                 <tr class="room{{$room->id}}" >
                                     <td>{{$room->id}}</td>
+                                    <td>{{$room->TenPhong}}</td>
                                     <td>{{$room->MaLoaiPhong}}</td>
                                     <td>{{$room->MaLoaiTinhTrangPhong}}</td>
                                     <td>{{$room->GhiChu}}</td>
@@ -85,6 +87,7 @@
 
         $('.addValue').click(function() {
             $('#id').val('');
+            $('#TenPhong').val('');
             $('#MaLoaiPhong').val('');
             $('#MaLoaiTinhTrangPhong').val('');
             $('#GhiChu').val('');
@@ -95,6 +98,7 @@
         });
         $('.createValue').click(function(e){
             e.preventDefault();
+            var TenPhong = $('#TenPhong').val();
             var MaLoaiPhong = $('#MaLoaiPhong').val();
             var MaLoaiTinhTrangPhong = $('#MaLoaiTinhTrangPhong').val();
             var GhiChu = $('#GhiChu').val();
@@ -105,6 +109,7 @@
                     type : 'POST',
                     data : {
                         _token: $('input[name=_token]').val(),
+                        TenPhong : TenPhong,
                         MaLoaiPhong : MaLoaiPhong,
                         MaLoaiTinhTrangPhong : MaLoaiTinhTrangPhong,
                         GhiChu : GhiChu
@@ -120,10 +125,12 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
+            var TenPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
             var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
             var MaLoaiTinhTrangPhong = $(this).parent().prev("td").prev("td").text();
             var GhiChu = $(this).parent().prev("td").text();
             $('#id').val(id);
+            $('#TenPhong').val(TenPhong);
             $('#MaLoaiPhong').val(MaLoaiPhong);
             $('#MaLoaiTinhTrangPhong').val(MaLoaiTinhTrangPhong);
             $('#GhiChu').val(GhiChu);
@@ -134,6 +141,7 @@
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
+            var TenPhong = $('#TenPhong').val();
             var MaLoaiTinhTrangPhong = $('#MaLoaiTinhTrangPhong').val();
             var MaLoaiPhong = $('#MaLoaiPhong').val();
             var GhiChu = $('#GhiChu').val();
@@ -147,17 +155,18 @@
                     data : {
                         _token: $('input[name=_token]').val(),
                         id : id,
+                        TenPhong : TenPhong,
                         MaLoaiPhong : MaLoaiPhong,
                         MaLoaiTinhTrangPhong : MaLoaiTinhTrangPhong,
                         GhiChu : GhiChu
                         
                     }
                 }).done(function(data) {
-                   $('#myModal').modal('hide');
-                   $(".room"+id).replaceWith(
+                 $('#myModal').modal('hide');
+                 $(".room"+id).replaceWith(
                     ("<tr class='room" + data.id + "'><td>" + data.id + "</td><td>" + data.MaLoaiPhong + "</td><td>" + data.MaLoaiTinhTrangPhong + "</td><td>" + data.GhiChu + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-               })
+             })
             }
         })
 
@@ -205,24 +214,34 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['room.update',$room->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['room.update',$room->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
+            </div>
+            <div>
+                <label for="label">Tên phòng</label>
+                <input type="text" name="TenPhong" class="form-control" id="TenPhong">
             </div>
             <div>
                 <label for="label">Mã loại phòng</label><!-- 
                 <input type="text" name="MaLoaiPhong" class="form-control" id="MaLoaiPhong"> -->
                 <select class="form-control" id="MaLoaiPhong" name="MaLoaiPhong">
                     <option value="">Select</option>
-                    @foreach($loaiPhong as $l)
-                    <option value="{{ $l->id }}">{{ $l->TenLoaiPhong }}</option>
+                    @foreach($loaiPhong as $lp)
+                    <option value="{{ $lp->id }}">{{ $lp->TenLoaiPhong }}</option>
                     @endforeach
                 </select>
             </div>
             <div>
                 <label for="label">Mã loại tình trạng phòng</label>
-                <input type="text" name="MaLoaiTinhTrangPhong" class="form-control" id="MaLoaiTinhTrangPhong">
+                <!-- <input type="text" name="MaLoaiTinhTrangPhong" class="form-control" id="MaLoaiTinhTrangPhong"> -->
+                <select class="form-control" id="MaLoaiTinhTrangPhong" name="MaLoaiTinhTrangPhong">
+                    <option value="">Select</option>
+                    @foreach($tinhTrangPhong as $ttp)
+                    <option value="{{ $ttp->id }}">{{ $ttp->TenLoaiTinhTrang }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Ghi chú</label>

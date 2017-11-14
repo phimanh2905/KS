@@ -13,7 +13,7 @@ class Room extends Model
     //
     protected $table = "phongs";
 
-    protected $fillable = ['MaLoaiPhong','MaLoaiTinhTrangPhong','GhiChu'];
+    protected $fillable = ['TenPhong','MaLoaiPhong','MaLoaiTinhTrangPhong','GhiChu'];
     // protected $hidden = ['',''];
     
     public function chiTietPhieuThuePhongs() {

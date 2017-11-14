@@ -37,6 +37,7 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $room = new Room();
+        $room->TenPhong = $request->TenPhong;
         $room->MaLoaiPhong = $request->MaLoaiPhong;
         $room->MaLoaiTinhTrangPhong = $request->MaLoaiTinhTrangPhong;
         $room->GhiChu = $request->GhiChu;
@@ -77,6 +78,7 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $room = Room::findOrFail($id);
+        $room->TenPhong = $request->TenPhong;
         $room->MaLoaiPhong = $request->MaLoaiPhong;
         $room->MaLoaiTinhTrangPhong = $request->MaLoaiTinhTrangPhong;
         $room->GhiChu = $request->GhiChu;
@@ -100,7 +102,7 @@ class RoomController extends Controller
     public function search(Request $req) {
         $result = '';
         $rooms = Room::where('MaLoaiPhong','like','%'.$req->key.'%')
-        ->orWhere('MaLoaiTinhTrangPhong','like','%'.$req->key.'%')->orWhere('GhiChu','like','%'.$req->key.'%')->get();
+        ->orWhere('MaLoaiTinhTrangPhong','like','%'.$req->key.'%')->orWhere('GhiChu','like','%'.$req->key.'%')->orWhere('TenPhong','like','%'.$req->key.'%')->get();
         $html = view('admin.room.search',compact('rooms'))->render();
         return response($html); 
     }

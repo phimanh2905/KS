@@ -228,13 +228,6 @@
         </div>
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li>
-                    <a href="http://localhost:8000/customer"><i class="fa fa-dashboard fa-fw"></i> Khách hàng</a>
-                </li>
-
-                <li>
-                    <a href="http://localhost:8000/device"><i class="fa fa-dashboard fa-fw"></i> Thiết bị</a>
-                </li>
 
                 <li>
                     <a href="http://localhost:8000/admin"><i class="fa fa-dashboard fa-fw"></i> Người dùng</a>
@@ -247,15 +240,14 @@
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý dịch vụ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+
                         <li>
                             <a href="http://localhost:8000/service">Dịch vụ</a>
                         </li>
                         <li>
                             <a href="http://localhost:8000/typeofservice">Loại dịch vụ</a>
                         </li>
-                        <li>
-                            <a href="http://localhost:8000/serviceusagelist">Danh sách sử dụng dịch vụ</a>
-                        </li>
+                        
                         <li>
                             <a href="http://localhost:8000/unit">Đơn vị</a>
                         </li>
@@ -274,6 +266,9 @@
                         </li>
                         <li>
                             <a href="http://localhost:8000/statusroomtype">Loại tình trạng</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/device"> Thiết bị</a>
                         </li>
                     </ul>
                 </li>
@@ -296,7 +291,7 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý thuê phòng<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Phiếu thuê phòng--- chưa có</a>
+                            <a href="http://localhost:8000/customer"> Khách hàng</a>
                         </li>
                         <li>
                             <a href="http://localhost:8000/roomreservationdetail">Chi tiết phiếu thuê phòng</a>
@@ -313,6 +308,9 @@
                         </li>
                         <li>
                             <a href="http://localhost:8000/checkindetail">Chi tiết phiếu nhận phòng</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/serviceusagelist">Danh sách sử dụng dịch vụ</a>
                         </li>
                     </ul>
                 </li>

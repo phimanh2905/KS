@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Danh sách hóa đơn
+                    Chi tiết hóa đơn
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -275,15 +275,33 @@
             </div>
             <div>
                 <label for="label">Mã phòng</label>
-                <input type="text" name="MaPhong" class="form-control" id="MaPhong">
+                <!-- <input type="text" name="MaPhong" class="form-control" id="MaPhong"> -->
+                <select class="form-control" id="MaPhong" name="MaPhong">
+                    <option value="">Select</option>
+                    @foreach($tenPhong as $tp)
+                    <option value="{{ $tp->id }}">{{ $tp->TenPhong }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã sử dụng dịch vụ</label>
-                <input type="text" name="MaSuDungDichVu" class="form-control" id="MaSuDungDichVu">
+                <!-- <input type="text" name="MaSuDungDichVu" class="form-control" id="MaSuDungDichVu"> -->
+                <select class="form-control" id="MaSuDungDichVu" name="MaSuDungDichVu">
+                    <option value="">Select</option>
+                    @foreach($suDungDichVu as $sddv)
+                    <option value="{{ $sddv->id }}">{{ $sddv->id }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã chính sách</label>
-                <input type="text" name="MaChinhSach" class="form-control" id="MaChinhSach">
+                <!-- <input type="text" name="MaChinhSach" class="form-control" id="MaChinhSach"> -->
+                <select class="form-control" id="MaChinhSach" name="MaChinhSach">
+                    <option value="">Select</option>
+                    @foreach($chinhSach as $cs)
+                    <option value="{{ $cs->id }}">{{ $cs->ThoiGianQuyDinh }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Phụ thu</label>

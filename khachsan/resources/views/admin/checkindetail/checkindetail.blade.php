@@ -136,19 +136,19 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var HoTenKhachHang = $(this).parent().prev("td").prev("td").prev("td").text();
-            var CMND = $(this).parent().prev("td").prev("td").text();
-            var NgayNhan = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var NgayTraDuKien = $(this).parent().prev("td").prev("td").prev("td").text();
-            var NgayTraThucTe = $(this).parent().prev("td").prev("td").text();
+            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var HoTenKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var CMND = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var NgayNhan = $(this).parent().prev("td").prev("td").prev("td").text();
+            var NgayTraDuKien = $(this).parent().prev("td").prev("td").text();
+            var NgayTraThucTe = $(this).parent().prev("td").text();
             $('#id').val(id);
             $('#MaPhong').val(MaPhong);
             $('#HoTenKhachHang').val(HoTenKhachHang);
             $('#CMND').val(CMND);
-            $('#NgayNhan').val('');
-            $('#NgayTraDuKien').val('');
-            $('#NgayTraThucTe').val('');
+            $('#NgayNhan').val(NgayNhan);
+            $('#NgayTraDuKien').val(NgayTraDuKien);
+            $('#NgayTraThucTe').val(NgayTraThucTe);
             $('#id').parent('div').show();
             $('.createValue').hide();
             $('.updateValue').show();
@@ -156,8 +156,8 @@
         $('.updateValue').click(function(e) {
             e.preventDefault();
             var id = $('#id').val();
-            var HoTenKhachHang = $('#HoTenKhachHang').val();
             var MaPhong = $('#MaPhong').val();
+            var HoTenKhachHang = $('#HoTenKhachHang').val();
             var CMND = $('#CMND').val();
             var NgayNhan = $('#NgayNhan').val();
             var NgayTraDuKien = $('#NgayTraDuKien').val();
@@ -240,7 +240,13 @@
             </div>
             <div>
                 <label for="label">Mã phòng</label>
-                <input type="text" name="MaPhong" class="form-control" id="MaPhong">
+                <!-- <input type="text" name="MaPhong" class="form-control" id="MaPhong"> -->
+                <select class="form-control" id="MaPhong" name="MaPhong">
+                    <option value="">Select</option>
+                    @foreach($tenPhong as $tp)
+                    <option value="{{ $tp->id }}">{{ $tp->TenPhong }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Họ tên khách hàng</label>
@@ -252,15 +258,16 @@
             </div>
             <div>
                 <label for="label">Ngày nhận</label>
-                <input type="text" name="NgayNhan" class="form-control" id="NgayNhan">
+                <input type="date" name="NgayNhan" class="form-control" id="NgayNhan">
+
             </div>
             <div>
                 <label for="label">Ngày trả dự kiến</label>
-                <input type="text" name="NgayTraDuKien" class="form-control" id="NgayTraDuKien">
+                <input type="date" name="NgayTraDuKien" class="form-control" id="NgayTraDuKien">
             </div>
             <div>
                 <label for="label">Ngày trả thực tế</label>
-                <input type="text" name="NgayTraThucTe" class="form-control" id="NgayTraThucTe">
+                <input type="date" name="NgayTraThucTe" class="form-control" id="NgayTraThucTe">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -29,7 +29,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên khách hàng</th>
-                                    <th>CMND</th>
+                                    <th>CMND/Căn cước</th>
                                     <th>Giới tính</th>
                                     <th>Địa chỉ</th>
                                     <th>Điện thoại</th>
@@ -138,13 +138,13 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenKhachHang = $(this).parent().prev("td").prev("td").prev("td").text();
-            var CMND = $(this).parent().prev("td").prev("td").text();
-            var GioiTinh = $(this).parent().prev("td").text();
+            var TenKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var CMND = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var GioiTinh = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
             var DiaChi = $(this).parent().prev("td").prev("td").prev("td").text();
             var DienThoai = $(this).parent().prev("td").prev("td").text();
             var QuocTich = $(this).parent().prev("td").text();
-            var TrangThai = $(this).parent().prev("td").text();
+            // var TrangThai = $(this).parent().prev("td").text();
             $('#id').val(id);
             $('#TenKhachHang').val(TenKhachHang);
             $('#CMND').val(CMND);
@@ -244,27 +244,27 @@
                 <input type="text" name="id" class="form-control" id="id">
             </div>
             <div>
-                <label for="label">TenKhachHang</label>
+                <label for="label">Tên khách hàng</label>
                 <input type="text" name="TenKhachHang" class="form-control" id="TenKhachHang">
             </div>
             <div>
-                <label for="label">CMND</label>
+                <label for="label">Số CMND/Căn cước</label>
                 <input type="text" name="CMND" class="form-control" id="CMND">
             </div>
             <div>
-                <label for="password">GioiTinh</label>
+                <label for="password">Giới tính</label>
                 <input type="text" name="GioiTinh" class="form-control" id="GioiTinh">
             </div>
             <div>
-                <label for="label">DiaChi</label>
+                <label for="label">Địa chỉ</label>
                 <input type="text" name="DiaChi" class="form-control" id="DiaChi">
             </div>
             <div>
-                <label for="label">DienThoai</label>
+                <label for="label">Điện thoại</label>
                 <input type="text" name="DienThoai" class="form-control" id="DienThoai">
             </div>
             <div>
-                <label for="label">QuocTich</label>
+                <label for="label">Quốc tịch</label>
                 <input type="text" name="QuocTich" class="form-control" id="QuocTich">
             </div>
             <div class="modal-footer">

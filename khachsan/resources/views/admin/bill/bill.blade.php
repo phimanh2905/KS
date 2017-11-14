@@ -229,15 +229,33 @@
             </div>
             <div>
                 <label for="label">Nhân viên lập</label>
-                <input type="text" name="NhanVienLap" class="form-control" id="NhanVienLap">
+                <!-- <input type="text" name="NhanVienLap" class="form-control" id="NhanVienLap"> -->
+                <select class="form-control" id="NhanVienLap" name="NhanVienLap">
+                    <option value="">Select</option>
+                    @foreach($nhanVienLap as $nvl)
+                    <option value="{{ $nvl->name }}">{{ $nvl->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã khách hàng</label>
-                <input type="text" name="MaKhachHang" class="form-control" id="MaKhachHang">
+                <!-- <input type="text" name="MaKhachHang" class="form-control" id="MaKhachHang"> -->
+                <select class="form-control" id="MaKhachHang" name="MaKhachHang">
+                    <option value="">Select</option>
+                    @foreach($khachHang as $kh)
+                    <option value="{{ $kh->id }}">{{ $kh->TenKhachHang }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã nhận phòng</label>
-                <input type="text" name="MaNhanPhong" class="form-control" id="MaNhanPhong">
+                <!-- <input type="text" name="MaNhanPhong" class="form-control" id="MaNhanPhong"> -->
+                <select class="form-control" id="MaNhanPhong" name="MaNhanPhong">
+                    <option value="">Select</option>
+                    @foreach($nhanPhong as $np)
+                    <option value="{{ $np->id }}">{{ $np->id }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Tổng tiền</label>
@@ -245,7 +263,7 @@
             </div>
             <div>
                 <label for="label">Ngày lập</label>
-                <input type="text" name="NgayLap" class="form-control" id="NgayLap">
+                <input type="date" name="NgayLap" class="form-control" id="NgayLap">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -160,9 +160,9 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoLuong = $(this).parent().prev("td").prev("td").text();
+            var TenThietBi = $(this).parent().prev("td").prev("td").prev("td").text();
+            var MaLoaiPhong = $(this).parent().prev("td").prev("td").text();
+            var SoLuong = $(this).parent().prev("td").text();
             $('#id').val(id);
             $('#TenThietBi').val(TenThietBi);
             $('#MaLoaiPhong').val(MaLoaiPhong);

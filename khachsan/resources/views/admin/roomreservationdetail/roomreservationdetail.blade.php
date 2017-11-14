@@ -162,11 +162,11 @@
                         
                     }
                 }).done(function(data) {
-                 $('#myModal').modal('hide');
-                 $(".roomreservationdetail"+id).replaceWith(
+                   $('#myModal').modal('hide');
+                   $(".roomreservationdetail"+id).replaceWith(
                     ("<tr class='roomreservationdetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaPhong + "</td><td>" + data.NgayDangKi + "</td><td>" + data.NgayNhan + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-             })
+               })
             }
         })
 
@@ -214,26 +214,39 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['roomreservationdetail.update',$roomreservationdetail->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['roomreservationdetail.update',$roomreservationdetail->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
             <div>
                 <label for="label">Mã khách hàng</label>
-                <input type="text" name="MaKhachHang" class="form-control" id="MaKhachHang">
+                <!-- <input type="text" name="MaKhachHang" class="form-control" id="MaKhachHang"> -->
+                <select class="form-control" id="MaKhachHang" name="MaKhachHang">
+                    <option value="">Select</option>
+                    @foreach($khachHang as $kh)
+                    <option value="{{ $kh->id }}">{{ $kh->TenKhachHang }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã phòng</label>
-                <input type="text" name="MaPhong" class="form-control" id="MaPhong">
+                <!-- <input type="text" name="MaPhong" class="form-control" id="MaPhong"> -->
+                <select class="form-control" id="MaPhong" name="MaPhong">
+                    <option value="">Select</option>
+                    @foreach($tenPhong as $tp)
+                    <option value="{{ $tp->id }}">{{ $tp->TenPhong }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Ngày đăng kí</label>
-                <input type="text" name="NgayDangKi" class="form-control" id="NgayDangKi">
+                <input type="date" name="NgayDangKi" class="form-control" id="NgayDangKi">
+                
             </div>
             <div>
                 <label for="label">Ngày nhận</label>
-                <input type="text" name="NgayNhan" class="form-control" id="NgayNhan">
+                <input type="date" name="NgayNhan" class="form-control" id="NgayNhan">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

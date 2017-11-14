@@ -212,11 +212,23 @@
             </div>
             <div>
                 <label for="label">Mã dịch vụ</label>
-                <input type="text" name="MaDichVu" class="form-control" id="MaDichVu">
+                <!-- <input type="text" name="MaDichVu" class="form-control" id="MaDichVu"> -->
+                <select class="form-control" id="MaDichVu" name="MaDichVu">
+                    <option value="">Select</option>
+                    @foreach($loaiDichVu as $ldv)
+                    <option value="{{ $ldv->id }}">{{ $ldv->TenLoaiDichVu }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã nhận phòng</label>
-                <input type="text" name="MaNhanPhong" class="form-control" id="MaNhanPhong">
+                <!-- <input type="text" name="MaNhanPhong" class="form-control" id="MaNhanPhong"> -->
+                <select class="form-control" id="MaNhanPhong" name="MaNhanPhong">
+                    <option value="">Select</option>
+                    @foreach($nhanPhong as $np)
+                    <option value="{{ $np->id }}">{{ $np->id }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Số lượng</label>

@@ -211,11 +211,23 @@
             </div>
             <div>
                 <label for="label">Mã phiếu thuê</label>
-                <input type="text" name="MaPhieuThue" class="form-control" id="MaPhieuThue">
+                <!-- <input type="text" name="MaPhieuThue" class="form-control" id="MaPhieuThue"> -->
+                <select class="form-control" id="MaPhieuThue" name="MaPhieuThue">
+                    <option value="">Select</option>
+                    @foreach($phieuThue as $pt)
+                    <option value="{{ $pt->id }}">{{ $pt->id }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã khách hàng</label>
-                <input type="text" name="MaKhachHang" class="form-control" id="MaKhachHang">
+                <!-- <input type="text" name="MaKhachHang" class="form-control" id="MaKhachHang"> -->
+                <select class="form-control" id="MaKhachHang" name="MaKhachHang">
+                    <option value="">Select</option>
+                    @foreach($khachHang as $kh)
+                    <option value="{{ $kh->id }}">{{ $kh->TenKhachHang }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

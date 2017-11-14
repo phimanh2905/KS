@@ -26,7 +26,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Thời gian quy định</th>
-                                    <th>Phụ thu</th>
+                                    <th>Phụ thu (%)</th>
                                     <!-- <th>Trạng thái</th> -->
                                     <th>Sửa</th>
                                     <th>Xóa</th>
@@ -209,7 +209,7 @@
                 <input type="text" name="ThoiGianQuyDinh" class="form-control" id="ThoiGianQuyDinh">
             </div>
             <div>
-                <label for="label">Phụ thu (VNĐ)</label>
+                <label for="label">Phụ thu (%)</label>
                 <input type="text" name="PhuThu" class="form-control" id="PhuThu">
             </div>
             <div class="modal-footer">

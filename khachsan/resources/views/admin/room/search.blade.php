@@ -1,9 +1,10 @@
 @foreach($rooms as $room)
 <tr>
     <td>{{$room->id}}</td>
-                                    <td>{{$room->MaLoaiPhong}}</td>
-                                    <td>{{$room->MaLoaiTinhTrangPhong}}</td>
-                                    <td>{{$room->GhiChu}}</td>
+    <td>{{$room->TenPhong}}</td>
+    <td>{{$room->MaLoaiPhong}}</td>
+    <td>{{$room->MaLoaiTinhTrangPhong}}</td>
+    <td>{{$room->GhiChu}}</td>
     <td>
         {!! Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa', ['class' => 'btn btn-warning editValue', 'data-toggle' => 'modal', 'data-target' => '#myModal','value'=> $room->id]) !!}
     </td>

@@ -120,9 +120,9 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var MaLoaiDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaDonVi = $(this).parent().prev("td").prev("td").prev("td").text();
-            var DonGia = $(this).parent().prev("td").prev("td").text();
+            var MaLoaiDichVu = $(this).parent().prev("td").prev("td").prev("td").text();
+            var MaDonVi = $(this).parent().prev("td").prev("td").text();
+            var DonGia = $(this).parent().prev("td").text();
             $('#id').val(id);
             $('#MaLoaiDichVu').val(MaLoaiDichVu);
             $('#MaDonVi').val(MaDonVi);
@@ -212,11 +212,23 @@
             </div>
             <div>
                 <label for="label">Mã loại dịch vụ</label>
-                <input type="text" name="MaLoaiDichVu" class="form-control" id="MaLoaiDichVu">
+                <!-- <input type="text" name="MaLoaiDichVu" class="form-control" id="MaLoaiDichVu"> -->
+                <select class="form-control" id="MaLoaiDichVu" name="MaLoaiDichVu">
+                    <option value="">Select</option>
+                    @foreach($loaiDichVu as $ldv)
+                    <option value="{{ $ldv->id }}">{{ $ldv->TenLoaiDichVu }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Mã đơn vị</label>
-                <input type="text" name="MaDonVi" class="form-control" id="MaDonVi">
+                <!-- <input type="text" name="MaDonVi" class="form-control" id="MaDonVi"> -->
+                <select class="form-control" id="MaDonVi" name="MaDonVi">
+                    <option value="">Select</option>
+                    @foreach($donVi as $dv)
+                    <option value="{{ $dv->id }}">{{ $dv->TenDonVi }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">Đơn giá (VNĐ)</label>
