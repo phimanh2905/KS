@@ -41,6 +41,7 @@ class AdminController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
         return response()->json($user);
@@ -99,7 +100,7 @@ class AdminController extends Controller
     public function search(Request $req) {
         $result = '';
         $users = User::where('name','like','%'.$req->key.'%')
-        ->orWhere('email','like','%'.$req->key.'%')->get();
+        ->orWhere('email','like','%'.$req->key.'%')->orWhere('role','like','%'.$req->key.'%')->get();
         $html = view('admin.search',compact('users'))->render();
         return response($html); 
     }
