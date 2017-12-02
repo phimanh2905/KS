@@ -100,9 +100,9 @@ class CheckinController extends Controller
     // tim kiem theo nhan vien lap va ma khach hang
     public function search(Request $req) {
         $result = '';
-        $checkin = Checkin::where('MaPhieuThue','like','%'.$req->key.'%')
+        $checkins = Checkin::where('MaPhieuThue','like','%'.$req->key.'%')
         ->orWhere('MaKhachHang','like','%'.$req->key.'%')->get();
-        $html = view('admin.checkin.search',compact('checkin'))->render();
+        $html = view('admin.checkin.search',compact('checkins'))->render();
         return response($html); 
     }
 }

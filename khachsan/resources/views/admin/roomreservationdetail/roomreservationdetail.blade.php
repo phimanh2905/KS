@@ -113,57 +113,57 @@
                 }).done(function(response) {
                     $('#myModal').modal('hide');
                 //     $('tbody tr').append("<tr class='roomreservationdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaKhachHang + "</td><td>" + response.MaPhong + "</td><td>" + response.NgayDangKi + "</td><td>" + response.NgayNhan + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
-                // });
+                });
             }
             history.go(0);
         });
 
-        /* Xem chi tiết - P.Manh - 2/12/17*/
+                /* Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.detailValue').click(function() {
-            var id = $(this).val();
-            var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var NgayDangKi = $(this).parent().prev("td").prev("td").prev("td").text();
-            var NgayNhan = $(this).parent().prev("td").prev("td").text();
-            $('#id').val(id);
-            $('#MaKhachHang').val(MaKhachHang);
-            $('#MaPhong').val(MaPhong);
-            $('#NgayDangKi').val(NgayDangKi);
-            $('#NgayNhan').val(NgayNhan);
-            $('#id').parent('div').hide();
-            $('.createValue').hide();
-            $('.updateValue').hide();
-        });
+                $('.detailValue').click(function() {
+                    var id = $(this).val();
+                    var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+                    var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+                    var NgayDangKi = $(this).parent().prev("td").prev("td").prev("td").text();
+                    var NgayNhan = $(this).parent().prev("td").prev("td").text();
+                    $('#id').val(id);
+                    $('#MaKhachHang').val(MaKhachHang);
+                    $('#MaPhong').val(MaPhong);
+                    $('#NgayDangKi').val(NgayDangKi);
+                    $('#NgayNhan').val(NgayNhan);
+                    $('#id').parent('div').hide();
+                    $('.createValue').hide();
+                    $('.updateValue').hide();
+                });
 
-        /* Sửa value - P.Manh - 5/11/17*/
+                /* Sửa value - P.Manh - 5/11/17*/
 
-        $('.editValue').click(function() {
-            var id = $(this).val();
-            var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").text();
-            var NgayDangKi = $(this).parent().prev("td").prev("td").text();
-            var NgayNhan = $(this).parent().prev("td").text();
-            $('#id').val(id);
-            $('#MaKhachHang').val(MaKhachHang);
-            $('#MaPhong').val(MaPhong);
-            $('#NgayDangKi').val(NgayDangKi);
-            $('#NgayNhan').val(NgayNhan);
-            $('#id').parent('div').hide();
-            $('.createValue').hide();
-            $('.updateValue').show();
-        });
-        $('.updateValue').click(function(e) {
-            e.preventDefault();
-            var id = $('#id').val();
-            var MaPhong = $('#MaPhong').val();
-            var MaKhachHang = $('#MaKhachHang').val();
-            var NgayDangKi = $('#NgayDangKi').val();
-            var NgayNhan = $('#NgayNhan').val();
-            if(MaKhachHang != '' && MaPhong != '' && NgayDangKi != '' && NgayNhan != '') {
-                $.ajax({
-                    dataType : 'json',
-                    type : 'PUT',
+                $('.editValue').click(function() {
+                    var id = $(this).val();
+                    var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+                    var MaPhong = $(this).parent().prev("td").prev("td").prev("td").text();
+                    var NgayDangKi = $(this).parent().prev("td").prev("td").text();
+                    var NgayNhan = $(this).parent().prev("td").text();
+                    $('#id').val(id);
+                    $('#MaKhachHang').val(MaKhachHang);
+                    $('#MaPhong').val(MaPhong);
+                    $('#NgayDangKi').val(NgayDangKi);
+                    $('#NgayNhan').val(NgayNhan);
+                    $('#id').parent('div').hide();
+                    $('.createValue').hide();
+                    $('.updateValue').show();
+                });
+                $('.updateValue').click(function(e) {
+                    e.preventDefault();
+                    var id = $('#id').val();
+                    var MaPhong = $('#MaPhong').val();
+                    var MaKhachHang = $('#MaKhachHang').val();
+                    var NgayDangKi = $('#NgayDangKi').val();
+                    var NgayNhan = $('#NgayNhan').val();
+                    if(MaKhachHang != '' && MaPhong != '' && NgayDangKi != '' && NgayNhan != '') {
+                        $.ajax({
+                            dataType : 'json',
+                            type : 'PUT',
 
                     // router
                     url : '/roomreservationdetail/'+id,

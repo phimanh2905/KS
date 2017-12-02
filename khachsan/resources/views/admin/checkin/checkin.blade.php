@@ -27,7 +27,7 @@
                                     <th>ID</th>
                                     <th>Mã phiếu thuê</th>
                                     <th>Mã khách hàng</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -38,14 +38,9 @@
                                     <td>{{$checkin->id}}</td>
                                     <td>{{$checkin->MaPhieuThue}}</td>
                                     <td>{{$checkin->MaKhachHang}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$checkin->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
+                                    </td>
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$checkin->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -110,7 +105,7 @@
                 .done(function(response) {
                     $('#myModal').modal('hide');
                 //     $('tbody tr').append("<tr class='checkin" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhieuThue + "</td><td>" + response.MaKhachHang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
-                // });
+                });
             }
             history.go(0);
         });
