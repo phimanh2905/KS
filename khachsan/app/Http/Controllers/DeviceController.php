@@ -101,7 +101,7 @@ class DeviceController extends Controller
     public function search(Request $req) {
         $result = '';
         $devices = Device::where('TenThietBi','like','%'.$req->key.'%')
-        ->orWhere('MaLoaiPhong','like','%'.$req->key.'%')->get();
+        ->orWhere('MaLoaiPhong','like','%'.$req->key.'%')->orWhere('SoLuong','like','%'.$req->key.'%')->get();
         $html = view('admin.device.search',compact('devices'))->render();
         return response($html); 
     }

@@ -105,7 +105,7 @@ class RoomtypeController extends Controller
     public function search(Request $req) {
         $result = '';
         $roomtypes = Roomtype::where('TenLoaiPhong','like','%'.$req->key.'%')
-        ->orWhere('DonGia','like','%'.$req->key.'%')->get();
+        ->orWhere('DonGia','like','%'.$req->key.'%')->orWhere('SoNguoiChuan','like','%'.$req->key.'%')->orWhere('SoNguoiToiDa','like','%'.$req->key.'%')->orWhere('TyLeTang','like','%'.$req->key.'%')->get();
         $html = view('admin.roomtype.search',compact('roomtypes'))->render();
         return response($html); 
     }

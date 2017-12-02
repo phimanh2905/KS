@@ -114,7 +114,7 @@ class BilldetailController extends Controller
  public function search(Request $req) {
     $result = '';
     $billdetails = Billdetail::where('MaPhong','like','%'.$req->key.'%')
-    ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->get();
+    ->orWhere('MaSuDungDichVu','like','%'.$req->key.'%')->orWhere('MaChinhSach','like','%'.$req->key.'%')->orWhere('PhuThu','like','%'.$req->key.'%')->orWhere('TienPhong','like','%'.$req->key.'%')->orWhere('TienDichVu','like','%'.$req->key.'%')->orWhere('GiamGiaKhachHang','like','%'.$req->key.'%')->orWhere('HinhThucThanhToan','like','%'.$req->key.'%')->orWhere('SoNgay','like','%'.$req->key.'%')->orWhere('ThanhTien','like','%'.$req->key.'%')->get();
     $html = view('admin.billdetail.search',compact('billdetails'))->render();
     return response($html); 
 }

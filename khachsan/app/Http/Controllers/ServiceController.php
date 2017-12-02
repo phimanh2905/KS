@@ -102,7 +102,7 @@ class ServiceController extends Controller
     public function search(Request $req) {
         $result = '';
         $services = Service::where('MaLoaiDichVu','like','%'.$req->key.'%')
-        ->orWhere('MaDonVi','like','%'.$req->key.'%')->get();
+        ->orWhere('MaDonVi','like','%'.$req->key.'%')->orWhere('DonGia','like','%'.$req->key.'%')->get();
         $html = view('admin.service.search',compact('services'))->render();
         return response($html); 
     }

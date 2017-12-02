@@ -100,7 +100,7 @@ class ServiceusagelistController extends Controller
     public function search(Request $req) {
         $result = '';
         $serviceusagelists = Serviceusagelist::where('MaDichVu','like','%'.$req->key.'%')
-        ->orWhere('MaNhanPhong','like','%'.$req->key.'%')->get();
+        ->orWhere('MaNhanPhong','like','%'.$req->key.'%')->orWhere('SoLuong','like','%'.$req->key.'%')->get();
         $html = view('admin.serviceusagelist.search',compact('serviceusagelists'))->render();
         return response($html); 
     }

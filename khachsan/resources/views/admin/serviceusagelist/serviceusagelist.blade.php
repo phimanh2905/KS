@@ -108,9 +108,10 @@
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='serviceusagelist" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaDichVu + "</td><td>" + response.MaNhanPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    // $('tbody tr').append("<tr class='serviceusagelist" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaDichVu + "</td><td>" + response.MaNhanPhong + "</td><td>" + response.SoLuong + "</td><td></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
+            history.go(0);
         });
 
         /* Xem chi tiết - P.Manh - 2/12/17*/
@@ -167,11 +168,12 @@
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
-                   $(".serviceusagelist"+id).replaceWith(
-                    ("<tr class='serviceusagelist" + data.id + "'><td>" + data.id + "</td><td>" + data.MaDichVu + "</td><td>" + data.MaNhanPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
-                    );
+                   // $(".serviceusagelist"+id).replaceWith(
+                   //  ("<tr class='serviceusagelist" + data.id + "'><td>" + data.id + "</td><td>" + data.MaDichVu + "</td><td>" + data.MaNhanPhong + "</td><td>" + data.SoLuong + "</td><td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                   //  );
                })
             }
+            history.go(0);
         })
 
         // Xóa value - P.Manh - 5/11/17

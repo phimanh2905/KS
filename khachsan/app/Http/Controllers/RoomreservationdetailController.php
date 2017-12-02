@@ -102,7 +102,7 @@ class RoomreservationdetailController extends Controller
     public function search(Request $req) {
         $result = '';
         $roomreservationdetails = Roomreservationdetail::where('MaPhong','like','%'.$req->key.'%')
-        ->orWhere('MaKhachHang','like','%'.$req->key.'%')->get();
+        ->orWhere('MaKhachHang','like','%'.$req->key.'%')->orWhere('NgayDangKi','like','%'.$req->key.'%')->orWhere('NgayNhan','like','%'.$req->key.'%')->get();
         $html = view('admin.roomreservationdetail.search',compact('roomreservationdetails'))->render();
         return response($html); 
     }

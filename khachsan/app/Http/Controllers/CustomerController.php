@@ -109,7 +109,7 @@ class CustomerController extends Controller
     public function search(Request $req) {
         $result = '';
         $customers = Customer::where('TenKhachHang','like','%'.$req->key.'%')
-        ->orWhere('DiaChi','like','%'.$req->key.'%')->get();
+        ->orWhere('CMND','like','%'.$req->key.'%')->orWhere('GioiTinh','like','%'.$req->key.'%')->orWhere('DiaChi','like','%'.$req->key.'%')->orWhere('DienThoai','like','%'.$req->key.'%')->orWhere('QuocTich','like','%'.$req->key.'%')->get();
         $html = view('admin.customer.search',compact('customers'))->render();
         return response($html); 
     }

@@ -101,11 +101,11 @@ class BillController extends Controller
         return response()->json();
     }
 
-// tim kiem theo nhan vien lap va ma khach hang
+// tim kiem 
     public function search(Request $req) {
         $result = '';
         $bills = Bill::where('NhanVienLap','like','%'.$req->key.'%')
-        ->orWhere('MaKhachHang','like','%'.$req->key.'%')->get();
+        ->orWhere('MaKhachHang','like','%'.$req->key.'%')->orWhere('MaNhanPhong','like','%'.$req->key.'%')->orWhere('TongTien','like','%'.$req->key.'%')->orWhere('NgayLap','like','%'.$req->key.'%')->get();
         $html = view('admin.bill.search',compact('bills'))->render();
         return response($html); 
     }

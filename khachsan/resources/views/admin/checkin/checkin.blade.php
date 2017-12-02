@@ -109,18 +109,18 @@
                 })
                 .done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='checkin" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhieuThue + "</td><td>" + response.MaKhachHang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
-                });
+                //     $('tbody tr').append("<tr class='checkin" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhieuThue + "</td><td>" + response.MaKhachHang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                // });
             }
-            
+            history.go(0);
         });
 
-        /* Xem chi tiết - P.Manh - 2/12/17*/
+                /* Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.detailValue').click(function() {
-            var id = $(this).val();
-            var MaPhieuThue = $(this).parent().prev("td").prev("td").text();
-            var MaKhachHang = $(this).parent().prev("td").text();
+                $('.detailValue').click(function() {
+                    var id = $(this).val();
+                    var MaPhieuThue = $(this).parent().prev("td").prev("td").text();
+                    var MaKhachHang = $(this).parent().prev("td").text();
             // var SoLuong = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#MaPhieuThue').val(MaPhieuThue);
@@ -131,12 +131,12 @@
             $('.updateValue').hide();
         });
 
-        /* Sửa value - P.Manh - 5/11/17*/
+                /* Sửa value - P.Manh - 5/11/17*/
 
-        $('.editValue').click(function() {
-            var id = $(this).val();
-            var MaPhieuThue = $(this).parent().prev("td").prev("td").prev("td").text();
-            var MaKhachHang = $(this).parent().prev("td").prev("td").text();
+                $('.editValue').click(function() {
+                    var id = $(this).val();
+                    var MaPhieuThue = $(this).parent().prev("td").prev("td").prev("td").text();
+                    var MaKhachHang = $(this).parent().prev("td").prev("td").text();
             // var SoLuong = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#MaPhieuThue').val(MaPhieuThue);
@@ -146,11 +146,11 @@
             $('.createValue').hide();
             $('.updateValue').show();
         });
-        $('.updateValue').click(function(e) {
-            e.preventDefault();
-            var id = $('#id').val();
-            var MaKhachHang = $('#MaKhachHang').val();
-            var MaPhieuThue = $('#MaPhieuThue').val();
+                $('.updateValue').click(function(e) {
+                    e.preventDefault();
+                    var id = $('#id').val();
+                    var MaKhachHang = $('#MaKhachHang').val();
+                    var MaPhieuThue = $('#MaPhieuThue').val();
             // var SoLuong = $('#SoLuong').val();
             if(MaPhieuThue != '' && MaKhachHang != '' ) {
                 $.ajax({
@@ -168,12 +168,12 @@
                     }
                 }).done(function(data) {
                  $('#myModal').modal('hide');
-                 $(".checkin"+id).replaceWith(
-                    ("<tr class='checkin" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhieuThue + "</td><td>" + data.MaKhachHang + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td> <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
-                    );
+                 // $(".checkin"+id).replaceWith(
+                 //    ("<tr class='checkin" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhieuThue + "</td><td>" + data.MaKhachHang + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td> <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                 //    );
              })
             }
-
+            history.go(0);
         })
 
         // Xóa value - P.Manh - 5/11/17

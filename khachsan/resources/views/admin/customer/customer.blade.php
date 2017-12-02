@@ -125,9 +125,10 @@
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='customer" + response.id + "'><td>" + data.id + "</td><td>" + response.TenKhachHang + "</td><td>" + response.CMND + "</td><td>" + response.GioiTinh + "</td><td>" + response.DiaChi + "</td><td>" + response.DienThoai + "</td><td>" + response.QuocTich + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Edit</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Delete</button></td></tr>");
+                    // $('tbody tr').append("<tr class='customer" + response.id + "'><td>" + data.id + "</td><td>" + response.TenKhachHang + "</td><td>" + response.CMND + "</td><td>" + response.GioiTinh + "</td><td>" + response.DiaChi + "</td><td>" + response.DienThoai + "</td><td>" + response.QuocTich + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Edit</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Delete</button></td></tr>");
                 });
             }
+            history.go(0);
         });
 
         /* Xem chi tiết - P.Manh - 2/12/17*/
@@ -203,11 +204,12 @@
                     }
                 }).done(function(data) {
                  $('#myModal').modal('hide');
-                 $(".customer"+id).replaceWith(
-                    ("<tr class='customer" + data.id + "'><td>" + data.id + "</td><td>" + data.TenKhachHang + "</td><td>" + data.CMND + "</td><td>" + data.GioiTinh + "</td><td>" + data.DiaChi + "</td><td>" + data.DienThoai + "</td><td>" + data.QuocTich + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
-                    );
+                 // $(".customer"+id).replaceWith(
+                 //    ("<tr class='customer" + data.id + "'><td>" + data.id + "</td><td>" + data.TenKhachHang + "</td><td>" + data.CMND + "</td><td>" + data.GioiTinh + "</td><td>" + data.DiaChi + "</td><td>" + data.DienThoai + "</td><td>" + data.QuocTich + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                 //    );
              })
             }
+            history.go(0);
         })
 
         // Delete value - P.Manh - 5/11/17

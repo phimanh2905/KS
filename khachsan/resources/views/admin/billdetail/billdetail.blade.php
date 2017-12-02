@@ -141,9 +141,10 @@
                     }
                 }).done(function(response) {
                     $('#myModal').modal('hide');
-                    $('tbody tr').append("<tr class='billdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhong + "</td><td>" + response.MaSuDungDichVu + "</td><td>" + response.MaChinhSach + "</td><td>" + response.PhuThu + "</td><td>" + response.TienPhong + "</td><td>" + response.TienDichVu + "</td><td>" + response.GiamGiaKhachHang + "</td><td>" + response.HinhThucThanhToan + "</td><td>" + response.HinhThucThanhToan + "</td><td>" + response.SoNgay + "</td><td>" + response.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
+                    // $('tbody tr').append("<tr class='billdetail" + response.id + "' ><td>" + data.id + "</td><td>" + response.MaPhong + "</td><td>" + response.MaSuDungDichVu + "</td><td>" + response.MaChinhSach + "</td><td>" + response.PhuThu + "</td><td>" + response.TienPhong + "</td><td>" + response.TienDichVu + "</td><td>" + response.GiamGiaKhachHang + "</td><td>" + response.HinhThucThanhToan + "</td><td>" + response.HinhThucThanhToan + "</td><td>" + response.SoNgay + "</td><td>" + response.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + response.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + response.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>");
                 });
             }
+            history.go(0);
         });
 
         /* Xem chi tiết - P.Manh - 2/12/17*/
@@ -242,11 +243,12 @@
                     }
                 }).done(function(data) {
                    $('#myModal').modal('hide');
-                   $(".billdetail"+id).replaceWith(
-                    ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
-                    );
+                   // $(".billdetail"+id).replaceWith(
+                   //  ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                   //  );
                })
             }
+            history.go(0);
         })
 
         // Xóa value - P.Manh - 5/11/17
