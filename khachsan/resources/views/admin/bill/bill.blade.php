@@ -187,7 +187,7 @@
                 }).done(function(data) {
                  $('#myModal').modal('hide');
                  $(".bill"+id).replaceWith(
-                    ("<tr class='bill" + data.id + "'><td>" + data.id + "</td><td>" + data.NhanVienLap + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaNhanPhong + "</td><td>" + data.TongTien + "</td><td>" + data.NgayLap + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='bill" + data.id + "'><td>" + data.id + "</td><td>" + data.NhanVienLap + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaNhanPhong + "</td><td>" + data.TongTien + "</td><td>" + data.NgayLap + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
              })
             }
@@ -274,7 +274,13 @@
             </div>
             <div>
                 <label for="label">Tổng tiền</label>
-                <input type="text" name="TongTien" class="form-control" id="TongTien">
+                
+                <div class="form-group input-group" >
+                    <span class="input-group-addon">VND</span>
+                    <input type="text" name="TongTien" class="form-control" id="TongTien">
+                    <span class="input-group-addon">.00</span>
+                </div>
+
             </div>
             <div>
                 <label for="label">Ngày lập</label>

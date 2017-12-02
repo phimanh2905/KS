@@ -78,8 +78,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$user->id]]) !!}
-             <div>
+               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$user->id]]) !!}
+               <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
@@ -97,7 +97,12 @@
             </div>
             <div>
                 <label for="label">Quyền</label>
-                <input type="text" name="role" class="form-control" id="role">
+                <!-- <input type="text" name="role" class="form-control" id="role"> -->
+                <select name="role" class="form-control" id="role">
+                    <option value="1">Admin</option>
+                    <option value="2">User</option>
+                </select>
+
             </div>
             
             <div class="modal-footer">
@@ -117,7 +122,7 @@
 <script type="text/javascript">
 
 
-   $(document).ready(function() {
+ $(document).ready(function() {
 
     /* Add value - Vu - 31/10/17*/
 
@@ -210,11 +215,11 @@
                     role : role
                 }
             }).done(function(data) {
-               $('#myModal').modal('hide');
-               $(".user"+id).replaceWith(
-                ("<tr class='user" + data.id + "'><td>" + data.id + "</td><td>" + data.name + "</td><td>" + data.email + "</td><td>" + data.role + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+             $('#myModal').modal('hide');
+             $(".user"+id).replaceWith(
+                ("<tr class='user" + data.id + "'><td>" + data.id + "</td><td>" + data.name + "</td><td>" + data.email + "</td><td>" + data.role + "</td><td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                 );
-           })
+         })
         }
     })
     $(document).on('click', '.deleteValue', function(e) {

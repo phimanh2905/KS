@@ -169,7 +169,7 @@
                 }).done(function(data) {
                  $('#myModal').modal('hide');
                  $(".checkin"+id).replaceWith(
-                    ("<tr class='checkin" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhieuThue + "</td><td>" + data.MaKhachHang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='checkin" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhieuThue + "</td><td>" + data.MaKhachHang + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td> <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
              })
             }

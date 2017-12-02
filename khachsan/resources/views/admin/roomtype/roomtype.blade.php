@@ -44,6 +44,7 @@
                                     <td>{{$roomtype->SoNguoiChuan}}</td>
                                     <td>{{$roomtype->SoNguoiToiDa}}</td>
                                     <td>{{$roomtype->TyLeTang}}</td>
+
                                     <td>
                                         <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$roomtype->id}}""><i class="fa fa-eye"></i> Xem</button>
                                     </td>
@@ -126,11 +127,11 @@
 
         $('.detailValue').click(function() {
             var id = $(this).val();
-            var TenLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var DonGia = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var SoNguoiChuan = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var SoNguoiToiDa = $(this).parent().prev("td").prev("td").prev("td").text();
-            var TyLeTang = $(this).parent().prev("td").prev("td").text();
+            var TenLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var DonGia = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var SoNguoiChuan = $(this).parent().prev("td").prev("td").prev("td").text();
+            var SoNguoiToiDa = $(this).parent().prev("td").prev("td").text();
+            var TyLeTang = $(this).parent().prev("td").text();
             $('#id').val(id);
             $('#TenLoaiPhong').val(TenLoaiPhong);
             $('#DonGia').val(DonGia);
@@ -146,11 +147,11 @@
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var DonGia = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
-            var SoNguoiChuan = $(this).parent().prev("td").prev("td").prev("td").text();
-            var SoNguoiToiDa = $(this).parent().prev("td").prev("td").text();
-            var TyLeTang = $(this).parent().prev("td").text();
+            var TenLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var DonGia = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var SoNguoiChuan = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var SoNguoiToiDa = $(this).parent().prev("td").prev("td").prev("td").text();
+            var TyLeTang = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#TenLoaiPhong').val(TenLoaiPhong);
             $('#DonGia').val(DonGia);
@@ -189,7 +190,7 @@
                 }).done(function(data) {
                  $('#myModal').modal('hide');
                  $(".roomtype"+id).replaceWith(
-                    ("<tr class='roomtype" + data.id + "'><td>" + data.id + "</td><td>" + data.TenLoaiPhong + "</td><td>" + data.DonGia + "</td><td>" + data.SoNguoiChuan + "</td><td>" + data.SoNguoiToiDa + "</td><td>" + data.TyLeTang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='roomtype" + data.id + "'><td>" + data.id + "</td><td>" + data.TenLoaiPhong + "</td><td>" + data.DonGia + "</td><td>" + data.SoNguoiChuan + "</td><td>" + data.SoNguoiToiDa + "</td><td>" + data.TyLeTang + "</td><td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td> <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
              })
             }
@@ -250,7 +251,12 @@
             </div>
             <div>
                 <label for="label">Đơn giá</label>
-                <input type="text" name="DonGia" class="form-control" id="DonGia">
+                
+                <div class="form-group input-group" >
+                    <span class="input-group-addon">VND</span>
+                    <input type="text" name="DonGia" class="form-control" id="DonGia">
+                    <span class="input-group-addon">.00</span>
+                </div>
             </div>
             <div>
                 <label for="label">Số lượng người chuẩn</label>

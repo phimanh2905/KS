@@ -243,7 +243,7 @@
                 }).done(function(data) {
                    $('#myModal').modal('hide');
                    $(".billdetail"+id).replaceWith(
-                    ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td><td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
                })
             }
@@ -334,11 +334,21 @@
             </div>
             <div>
                 <label for="label">Tiền phòng</label>
-                <input type="text" name="TienPhong" class="form-control" id="TienPhong">
+                
+                <div class="form-group input-group" >
+                    <span class="input-group-addon">VND</span>
+                    <input type="text" name="TienPhong" class="form-control" id="TienPhong">
+                    <span class="input-group-addon">.00</span>
+                </div>
             </div>
             <div>
                 <label for="label">Tiền dịch vụ</label>
-                <input type="text" name="TienDichVu" class="form-control" id="TienDichVu">
+                
+                <div class="form-group input-group" >
+                    <span class="input-group-addon">VND</span>
+                    <input type="text" name="TienDichVu" class="form-control" id="TienDichVu">
+                    <span class="input-group-addon">.00</span>
+                </div>
             </div>
             <div>
                 <label for="label">Giảm giá khách hàng</label>
@@ -354,7 +364,12 @@
             </div>
             <div>
                 <label for="label">Thành tiền</label>
-                <input type="text" name="ThanhTien" class="form-control" id="ThanhTien">
+                
+                <div class="form-group input-group" >
+                    <span class="input-group-addon">VND</span>
+                    <input type="text" name="ThanhTien" class="form-control" id="ThanhTien">
+                    <span class="input-group-addon">.00</span>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

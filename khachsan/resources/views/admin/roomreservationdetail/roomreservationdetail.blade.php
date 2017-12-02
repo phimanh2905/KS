@@ -178,7 +178,7 @@
                 }).done(function(data) {
                  $('#myModal').modal('hide');
                  $(".roomreservationdetail"+id).replaceWith(
-                    ("<tr class='roomreservationdetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaPhong + "</td><td>" + data.NgayDangKi + "</td><td>" + data.NgayNhan + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='roomreservationdetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaPhong + "</td><td>" + data.NgayDangKi + "</td><td>" + data.NgayNhan + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
              })
             }

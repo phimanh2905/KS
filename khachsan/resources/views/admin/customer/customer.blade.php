@@ -204,7 +204,7 @@
                 }).done(function(data) {
                  $('#myModal').modal('hide');
                  $(".customer"+id).replaceWith(
-                    ("<tr class='customer" + data.id + "'><td>" + data.id + "</td><td>" + data.TenKhachHang + "</td><td>" + data.CMND + "</td><td>" + data.GioiTinh + "</td><td>" + data.DiaChi + "</td><td>" + data.DienThoai + "</td><td>" + data.QuocTich + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                    ("<tr class='customer" + data.id + "'><td>" + data.id + "</td><td>" + data.TenKhachHang + "</td><td>" + data.CMND + "</td><td>" + data.GioiTinh + "</td><td>" + data.DiaChi + "</td><td>" + data.DienThoai + "</td><td>" + data.QuocTich + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td>  <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
              })
             }

@@ -27,7 +27,7 @@
                                     <th>ID</th>
                                     <th>Mã loại dịch vụ</th>
                                     <th>Mã đơn vị</th>
-                                    <th>Đơn giá</th>
+                                    <th>Đơn giá (VND)</th>
                                     <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
@@ -166,11 +166,11 @@
                         
                     }
                 }).done(function(data) {
-                 $('#myModal').modal('hide');
-                 $(".service"+id).replaceWith(
-                    ("<tr class='service" + data.id + "'><td>" + data.id + "</td><td>" + data.MaLoaiDichVu + "</td><td>" + data.MaDonVi + "</td><td>" + data.DonGia + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                   $('#myModal').modal('hide');
+                   $(".service"+id).replaceWith(
+                    ("<tr class='service" + data.id + "'><td>" + data.id + "</td><td>" + data.MaLoaiDichVu + "</td><td>" + data.MaDonVi + "</td><td>" + data.DonGia + "</td> <td><button class='btn btn-info detailValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-eye'></i> Xem</button></td> <td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-             })
+               })
             }
         })
 
@@ -218,8 +218,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['service.update',$service->id]]) !!}
-             <div>
+               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['service.update',$service->id]]) !!}
+               <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
@@ -245,7 +245,12 @@
             </div>
             <div>
                 <label for="label">Đơn giá (VNĐ)</label>
-                <input type="text" name="DonGia" class="form-control" id="DonGia">
+                <!-- <input type="text" name="DonGia" class="form-control" id="DonGia"> -->
+                <div class="form-group input-group" >
+                    <span class="input-group-addon">VND</span>
+                    <input type="text" class="form-control" name="DonGia" id="DonGia">
+                    <span class="input-group-addon">.00</span>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
