@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Quản Lý Khách Sạn</title>
 
     <!-- Bootstrap Core CSS -->
     <link href=" {{ asset('backend/vendor/bootstrap/css/bootstrap.min.css')}} " rel="stylesheet">
@@ -60,9 +60,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('backend/dist/js/sb-admin-2.js')}}"></script>
-
+    @yield('script')
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    {!! Html::script('js/js.js') !!}
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
