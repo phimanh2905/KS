@@ -4,7 +4,7 @@
     @if (count($billdetails) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Chi tiết hóa đơn
                 </div>
@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Thêm mới
                             </button>
                         </div>
@@ -35,7 +35,7 @@
                                     <th>Hình thức thanh toán</th>
                                     <th>Số ngày</th>
                                     <th>Thành tiền</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -54,14 +54,9 @@
                                     <td>{{$billdetail->HinhThucThanhToan}}</td>
                                     <td>{{$billdetail->SoNgay}}</td>
                                     <td>{{$billdetail->ThanhTien}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$billdetail->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$billdetail->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -151,9 +146,9 @@
             }
         });
 
-        /* Sửa value - P.Manh - 5/11/17*/
+        /* Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.editValue').click(function() {
+        $('.detailValue').click(function() {
             var id = $(this).val();
             var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
             var MaSuDungDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
@@ -165,6 +160,36 @@
             var HinhThucThanhToan = $(this).parent().prev("td").prev("td").prev("td").text();
             var SoNgay = $(this).parent().prev("td").prev("td").text();
             var ThanhTien = $(this).parent().prev("td").text();
+            $('#id').val(id);
+            $('#MaPhong').val(MaPhong);
+            $('#MaSuDungDichVu').val(MaSuDungDichVu);
+            $('#MaChinhSach').val(MaChinhSach);
+            $('#PhuThu').val(PhuThu);
+            $('#TienPhong').val(TienPhong);
+            $('#TienDichVu').val(TienDichVu);
+            $('#GiamGiaKhachHang').val(GiamGiaKhachHang);
+            $('#HinhThucThanhToan').val(HinhThucThanhToan);
+            $('#SoNgay').val(SoNgay);
+            $('#ThanhTien').val(ThanhTien);
+            $('#id').parent('div').hide();
+            $('.createValue').hide();
+            $('.updateValue').hide();
+        });
+
+        /* Sửa value - P.Manh - 5/11/17*/
+
+        $('.editValue').click(function() {
+            var id = $(this).val();
+            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaSuDungDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaChinhSach = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var PhuThu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var TienPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var TienDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var GiamGiaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var HinhThucThanhToan = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var SoNgay = $(this).parent().prev("td").prev("td").prev("td").text();
+            var ThanhTien = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#MaPhong').val(MaPhong);
             $('#MaSuDungDichVu').val(MaSuDungDichVu);
@@ -216,11 +241,11 @@
                         
                     }
                 }).done(function(data) {
-                 $('#myModal').modal('hide');
-                 $(".billdetail"+id).replaceWith(
+                   $('#myModal').modal('hide');
+                   $(".billdetail"+id).replaceWith(
                     ("<tr class='billdetail" + data.id + "' ><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.MaSuDungDichVu + "</td><td>" + data.MaChinhSach + "</td><td>" + data.PhuThu + "</td><td>" + data.TienPhong + "</td><td>" + data.TienDichVu + "</td><td>" + data.GiamGiaKhachHang + "</td><td>" + data.HinhThucThanhToan + "</td><td>" + data.SoNgay + "</td><td>" + data.ThanhTien + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" + data.id + "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-             })
+               })
             }
         })
 
@@ -268,8 +293,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['billdetail.update',$billdetail->id]]) !!}
-             <div>
+               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['billdetail.update',$billdetail->id]]) !!}
+               <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>

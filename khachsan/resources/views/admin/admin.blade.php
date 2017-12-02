@@ -6,7 +6,7 @@
     @if (count($users) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Danh sách người dùng
                 </div>
@@ -15,7 +15,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Add user
                             </button>
                         </div>
@@ -31,7 +31,7 @@
                                     <th>Tên người dùng</th>
                                     <th>Email</th>
                                     <th>Quyền</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -43,6 +43,10 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role }}</td>
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$user->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
+
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$user->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -74,8 +78,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$user->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$user->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
@@ -110,10 +114,10 @@
 @endif
 @endsection
 @section('script')
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
- $(document).ready(function() {
+   $(document).ready(function() {
 
     /* Add value - Vu - 31/10/17*/
 
@@ -154,13 +158,30 @@
         }
     });
 
-    /* Edit value - Vu - 31/10/17*/
+    /* Xem chi tiết - P.Manh - 2/12/17*/
 
-    $('.editValue').click(function() {
+    $('.detailValue').click(function() {
         var id = $(this).val();
         var name = $(this).parent().prev("td").prev("td").prev("td").text();
         var email = $(this).parent().prev("td").prev("td").text();
         var role = $(this).parent().prev("td").text();
+        $('#id').val(id);
+        $('#name').val(name);
+        $('#email').val(email);
+        $('#role').val(role);
+        $('#id').parent('div').hide();
+        $('#password').parent('div').hide();
+        $('.createValue').hide();
+        $('.updateValue').hide();
+    });
+
+    /* Edit value - Vu - 31/10/17*/
+
+    $('.editValue').click(function() {
+        var id = $(this).val();
+        var name = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+        var email = $(this).parent().prev("td").prev("td").prev("td").text();
+        var role = $(this).parent().prev("td").prev("td").text();
         $('#id').val(id);
         $('#name').val(name);
         $('#email').val(email);
@@ -189,11 +210,11 @@
                     role : role
                 }
             }).done(function(data) {
-             $('#myModal').modal('hide');
-             $(".user"+id).replaceWith(
+               $('#myModal').modal('hide');
+               $(".user"+id).replaceWith(
                 ("<tr class='user" + data.id + "'><td>" + data.id + "</td><td>" + data.name + "</td><td>" + data.email + "</td><td>" + data.role + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                 );
-         })
+           })
         }
     })
     $(document).on('click', '.deleteValue', function(e) {

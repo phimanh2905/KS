@@ -4,7 +4,7 @@
     @if (count($serviceusagelists) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Danh sách sử dụng dịch vụ
                 </div>
@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Thêm mới
                             </button>
                         </div>
@@ -28,7 +28,7 @@
                                     <th>Mã dịch vụ</th>
                                     <th>Mã nhận phòng</th>
                                     <th>Số lượng</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -40,14 +40,11 @@
                                     <td>{{$serviceusagelist->MaDichVu}}</td>
                                     <td>{{$serviceusagelist->MaNhanPhong}}</td>
                                     <td>{{$serviceusagelist->SoLuong}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$serviceusagelist->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
+
+
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$serviceusagelist->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -116,13 +113,29 @@
             }
         });
 
-        /* Sửa value - P.Manh - 5/11/17*/
+        /* Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.editValue').click(function() {
+        $('.detailValue').click(function() {
             var id = $(this).val();
             var MaDichVu = $(this).parent().prev("td").prev("td").prev("td").text();
             var MaNhanPhong = $(this).parent().prev("td").prev("td").text();
             var SoLuong = $(this).parent().prev("td").text();
+            $('#id').val(id);
+            $('#MaDichVu').val(MaDichVu);
+            $('#MaNhanPhong').val(MaNhanPhong);
+            $('#SoLuong').val(SoLuong);
+            $('#id').parent('div').hide();
+            $('.createValue').hide();
+            $('.updateValue').hide();
+        });
+
+        /* Sửa value - P.Manh - 5/11/17*/
+
+        $('.editValue').click(function() {
+            var id = $(this).val();
+            var MaDichVu = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var MaNhanPhong = $(this).parent().prev("td").prev("td").prev("td").text();
+            var SoLuong = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#MaDichVu').val(MaDichVu);
             $('#MaNhanPhong').val(MaNhanPhong);

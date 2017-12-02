@@ -4,7 +4,7 @@
     @if (count($checkindetails) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Danh sách chi tiết phiếu nhận phòng
                 </div>
@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Thêm mới
                             </button>
                         </div>
@@ -27,11 +27,11 @@
                                     <th>ID</th>
                                     <th>Mã phòng</th>
                                     <th>Họ tên khách hàng</th>
-                                    <th>CMND</th>
+                                    <th>CMND/Căn cước</th>
                                     <th>Ngày nhận</th>
                                     <th>Ngày trả dự kiến</th>
                                     <th>Ngày trả thực tế</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -46,14 +46,9 @@
                                     <td>{{$checkindetail->NgayNhan}}</td>
                                     <td>{{$checkindetail->NgayTraDuKien}}</td>
                                     <td>{{$checkindetail->NgayTraThucTe}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$checkindetail->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$checkindetail->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -132,9 +127,9 @@
             }
         });
 
-        /* Sửa value - P.Manh - 5/11/17*/
+        /*Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.editValue').click(function() {
+        $('.detailValue').click(function() {
             var id = $(this).val();
             var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
             var HoTenKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
@@ -149,7 +144,29 @@
             $('#NgayNhan').val(NgayNhan);
             $('#NgayTraDuKien').val(NgayTraDuKien);
             $('#NgayTraThucTe').val(NgayTraThucTe);
-            $('#id').parent('div').show();
+            $('#id').parent('div').hide();
+            $('.createValue').hide();
+            $('.updateValue').hide();
+        });
+
+        /* Sửa value - P.Manh - 5/11/17*/
+
+        $('.editValue').click(function() {
+            var id = $(this).val();
+            var MaPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var HoTenKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var CMND = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var NgayNhan = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var NgayTraDuKien = $(this).parent().prev("td").prev("td").prev("td").text();
+            var NgayTraThucTe = $(this).parent().prev("td").prev("td").text();
+            $('#id').val(id);
+            $('#MaPhong').val(MaPhong);
+            $('#HoTenKhachHang').val(HoTenKhachHang);
+            $('#CMND').val(CMND);
+            $('#NgayNhan').val(NgayNhan);
+            $('#NgayTraDuKien').val(NgayTraDuKien);
+            $('#NgayTraThucTe').val(NgayTraThucTe);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
@@ -181,11 +198,11 @@
                         
                     }
                 }).done(function(data) {
-                   $('#myModal').modal('hide');
-                   $(".checkindetail"+id).replaceWith(
+                 $('#myModal').modal('hide');
+                 $(".checkindetail"+id).replaceWith(
                     ("<tr class='checkindetail" + data.id + "'><td>" + data.id + "</td><td>" + data.MaPhong + "</td><td>" + data.HoTenKhachHang + "</td><td>" + data.CMND + "</td><td>" + response.NgayNhan + "</td><td>" + response.NgayTraThucTe + "</td><td>" + response.NgayTraThucTe + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-               })
+             })
             }
         })
 
@@ -233,8 +250,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['checkindetail.update',$checkindetail->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['checkindetail.update',$checkindetail->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
@@ -250,7 +267,13 @@
             </div>
             <div>
                 <label for="label">Họ tên khách hàng</label>
-                <input type="text" name="HoTenKhachHang" class="form-control" id="HoTenKhachHang">
+                <!-- <input type="text" name="HoTenKhachHang" class="form-control" id="HoTenKhachHang"> -->
+                <select class="form-control" id="HoTenKhachHang" name="HoTenKhachHang">
+                    <option value="">Select</option>
+                    @foreach($khachHang as $kh)
+                    <option value="{{ $kh->id }}">{{ $kh->TenKhachHang }}</option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="label">CMND</label>

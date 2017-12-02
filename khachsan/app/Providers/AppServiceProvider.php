@@ -17,6 +17,7 @@ use App\RoomReservationDetail;
 use App\User;
 use App\CheckoutPolicy;
 use App\ServiceUsageList;
+use App\Device;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+// combo ma loai phong ( thiet bi )
+        view()->composer('admin.device.device', function($view) {
+            $loaiPhong = RoomType::all();
+            $view->with('loaiPhong', $loaiPhong);
+        });
+
 
 // combo ma loai phong ( phong )
         view()->composer('admin.room.room', function($view) {
@@ -71,6 +79,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with('tenPhong', $tenPhong);
         });
 
+// combo ho ten khach hang ( danh sach khach hang )
+        view()->composer('admin.checkindetail.checkindetail', function($view) {
+            $khachHang = Customer::all();
+            $view->with('khachHang', $khachHang);
+        });
+
 // combo ma phong ( danh sach chi tiet phieu nhan phong )
         view()->composer('admin.roomreservationdetail.roomreservationdetail', function($view) {
             $tenPhong = Room::all();
@@ -96,7 +110,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-// combo ma khach hang ( hoa don )
+// combo ma khach hang, ma nhan phong, nhan vien lap ( hoa don )
         view()->composer('admin.bill.bill', function($view) {
             $khachHang = Customer::all();
             $view->with('khachHang', $khachHang);

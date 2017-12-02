@@ -6,7 +6,7 @@
     @if (count($customers) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Danh sách khách hàng
                 </div>
@@ -15,7 +15,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Thêm mới
                             </button>
                         </div>
@@ -34,7 +34,7 @@
                                     <th>Địa chỉ</th>
                                     <th>Điện thoại</th>
                                     <th>Quốc tịch</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -49,14 +49,10 @@
                                     <td>{{$customer->DiaChi}}</td>
                                     <td>{{$customer->DienThoai}}</td>
                                     <td>{{$customer->QuocTich}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$customer->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
+
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$customer->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -73,14 +69,14 @@
                     
                     <!-- /.table-responsive -->
 
-               </div>
-               <!-- /.panel-body -->
-           </div>
-           <!-- /.panel -->
-       </div>
-       <!-- /.col-lg-12 -->
-   </div>
-   <!-- /.row -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
 </div>
 @endif
 @endsection
@@ -134,9 +130,9 @@
             }
         });
 
-        /* Edit value - P.Manh - 5/11/17*/
+        /* Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.editValue').click(function() {
+        $('.detailValue').click(function() {
             var id = $(this).val();
             var TenKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
             var CMND = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
@@ -144,7 +140,7 @@
             var DiaChi = $(this).parent().prev("td").prev("td").prev("td").text();
             var DienThoai = $(this).parent().prev("td").prev("td").text();
             var QuocTich = $(this).parent().prev("td").text();
-            // var TrangThai = $(this).parent().prev("td").text();
+            
             $('#id').val(id);
             $('#TenKhachHang').val(TenKhachHang);
             $('#CMND').val(CMND);
@@ -152,8 +148,30 @@
             $('#DiaChi').val(DiaChi);
             $('#DienThoai').val(DienThoai);
             $('#QuocTich').val(QuocTich);
-            $('#TrangThai').val(TrangThai);
-            $('#id').parent('div').show();
+            $('#id').parent('div').hide();
+            $('.createValue').hide();
+            $('.updateValue').hide();
+        });
+
+        /* Edit value - P.Manh - 5/11/17*/
+
+        $('.editValue').click(function() {
+            var id = $(this).val();
+            var TenKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var CMND = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var GioiTinh = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var DiaChi = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var DienThoai = $(this).parent().prev("td").prev("td").prev("td").text();
+            var QuocTich = $(this).parent().prev("td").prev("td").text();
+            
+            $('#id').val(id);
+            $('#TenKhachHang').val(TenKhachHang);
+            $('#CMND').val(CMND);
+            $('#GioiTinh').val(GioiTinh);
+            $('#DiaChi').val(DiaChi);
+            $('#DienThoai').val(DienThoai);
+            $('#QuocTich').val(QuocTich);
+            $('#id').parent('div').hide();
             $('.createValue').hide();
             $('.updateValue').show();
         });
@@ -166,8 +184,7 @@
             var DiaChi = $('#DiaChi').val();
             var DienThoai = $('#DienThoai').val();
             var QuocTich = $('#QuocTich').val();
-            var TrangThai = $('#TrangThai').val();
-            if(TenKhachHang != '' && CMND != '' && GioiTinh != '' && DiaChi != '' && DienThoai != '' && QuocTich != '' && TrangThai != '') {
+            if(TenKhachHang != '' && CMND != '' && GioiTinh != '' && DiaChi != '' && DienThoai != '' && QuocTich != '' ) {
                 $.ajax({
                     dataType : 'json',
                     type : 'PUT',
@@ -183,14 +200,13 @@
                         DiaChi : DiaChi,
                         DienThoai : DienThoai,
                         QuocTich : QuocTich,
-                        TrangThai : TrangThai
                     }
                 }).done(function(data) {
-                   $('#myModal').modal('hide');
-                   $(".customer"+id).replaceWith(
-                    ("<tr class='customer" + data.id + "'><td>" + data.id + "</td><td>" + data.TenKhachHang + "</td><td>" + data.CMND + "</td><td>" + data.GioiTinh + "</td><td>" + data.DiaChi + "</td><td>" + data.DienThoai + "</td><td>" + data.QuocTich + "</td><td>" + data.TrangThai + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
+                 $('#myModal').modal('hide');
+                 $(".customer"+id).replaceWith(
+                    ("<tr class='customer" + data.id + "'><td>" + data.id + "</td><td>" + data.TenKhachHang + "</td><td>" + data.CMND + "</td><td>" + data.GioiTinh + "</td><td>" + data.DiaChi + "</td><td>" + data.DienThoai + "</td><td>" + data.QuocTich + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-               })
+             })
             }
         })
 
@@ -238,8 +254,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$customer->id]]) !!}
-             <div>
+               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['admin.update',$customer->id]]) !!}
+               <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
@@ -253,7 +269,14 @@
             </div>
             <div>
                 <label for="password">Giới tính</label>
-                <input type="text" name="GioiTinh" class="form-control" id="GioiTinh">
+                <!-- <input type="text" name="GioiTinh" class="form-control" id="GioiTinh"> -->
+
+                <select class="form-control" id="GioiTinh" name="GioiTinh">
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                    <option>Khác</option>
+                </select>
+
             </div>
             <div>
                 <label for="label">Địa chỉ</label>

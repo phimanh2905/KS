@@ -4,7 +4,7 @@
     @if (count($bills) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Danh sách hóa đơn
                 </div>
@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Thêm mới
                             </button>
                         </div>
@@ -30,7 +30,7 @@
                                     <th>Mã nhận phòng</th>
                                     <th>Tổng tiền</th>
                                     <th>Ngày lập</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -44,14 +44,9 @@
                                     <td>{{$bill->MaNhanPhong}}</td>
                                     <td>{{$bill->TongTien}}</td>
                                     <td>{{$bill->NgayLap}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$bill->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$bill->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -125,15 +120,35 @@
             }
         });
 
-        /* Sửa value - P.Manh - 5/11/17*/
+        /* Xem chi tiết - P.Manh - 2/12/17*/
 
-        $('.editValue').click(function() {
+        $('.detailValue').click(function() {
             var id = $(this).val();
             var NhanVienLap = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
             var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
             var MaNhanPhong = $(this).parent().prev("td").prev("td").prev("td").text();
             var TongTien = $(this).parent().prev("td").prev("td").text();
             var NgayLap = $(this).parent().prev("td").text();
+            $('#id').val(id);
+            $('#NhanVienLap').val(NhanVienLap);
+            $('#MaKhachHang').val(MaKhachHang);
+            $('#MaNhanPhong').val(MaNhanPhong);
+            $('#TongTien').val(TongTien);
+            $('#NgayLap').val(NgayLap);
+            $('#id').parent('div').hide();
+            $('.createValue').hide();
+            $('.updateValue').hide();
+        });
+
+        /* Sửa value - P.Manh - 5/11/17*/
+
+        $('.editValue').click(function() {
+            var id = $(this).val();
+            var NhanVienLap = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaKhachHang = $(this).parent().prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var MaNhanPhong = $(this).parent().prev("td").prev("td").prev("td").prev("td").text();
+            var TongTien = $(this).parent().prev("td").prev("td").prev("td").text();
+            var NgayLap = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
             $('#NhanVienLap').val(NhanVienLap);
             $('#MaKhachHang').val(MaKhachHang);
@@ -170,11 +185,11 @@
                         
                     }
                 }).done(function(data) {
-                   $('#myModal').modal('hide');
-                   $(".bill"+id).replaceWith(
+                 $('#myModal').modal('hide');
+                 $(".bill"+id).replaceWith(
                     ("<tr class='bill" + data.id + "'><td>" + data.id + "</td><td>" + data.NhanVienLap + "</td><td>" + data.MaKhachHang + "</td><td>" + data.MaNhanPhong + "</td><td>" + data.TongTien + "</td><td>" + data.NgayLap + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-               })
+             })
             }
         })
 
@@ -222,8 +237,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['bill.update',$bill->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['bill.update',$bill->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>

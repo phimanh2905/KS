@@ -101,4 +101,6 @@ Route::get('/room.search','RoomController@search');
 Route::resource('regulation','RegulationController');
 Route::get('/regulation.search','RegulationController@search');
 
-
+// so do phong
+// P.Manh 1/12/17
+Route::resource('roommap','RoommapController');

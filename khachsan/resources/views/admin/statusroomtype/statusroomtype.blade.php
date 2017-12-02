@@ -4,7 +4,7 @@
     @if (count($statusroomtypes) > 0)
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Danh sách loại tình trạng phòng
                 </div>
@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-primary addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
+                            <button class="btn btn-success addValue" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;"><i class="fa fa-plus"></i>
                                 Thêm mới
                             </button>
                         </div>
@@ -26,7 +26,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên loại tình trạng</th>
-                                    <!-- <th>Trạng thái</th> -->
+                                    <th>Xem chi tiết</th>
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -36,14 +36,10 @@
                                 <tr class="statusroomtype{{$statusroomtype->id}}" >
                                     <td>{{$statusroomtype->id}}</td>
                                     <td>{{$statusroomtype->TenLoaiTinhTrang}}</td>
-                                    <!-- <td>
-                                        <button class="btn btn-success btn-circle" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-circle" type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td> -->
+                                    <td>
+                                        <button class="btn btn-info detailValue" data-toggle="modal" data-target="#myModal" value="{{$statusroomtype->id}}""><i class="fa fa-eye"></i> Xem</button>
+                                    </td>
+
                                     <td>
                                         <button class="btn btn-warning editValue" data-toggle="modal" data-target="#myModal" value="{{$statusroomtype->id}}""><i class="fa fa-pencil-square-o"></i> Sửa</button>
                                     </td>
@@ -110,11 +106,27 @@
             }
         });
 
+        /* Xem chi tiết - P.Manh - 2/12/17*/
+
+        $('.detailValue').click(function() {
+            var id = $(this).val();
+            var TenLoaiTinhTrang = $(this).parent().prev("td").text();
+            // var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
+            // var SoLuong = $(this).parent().prev("td").prev("td").text();
+            $('#id').val(id);
+            $('#TenLoaiTinhTrang').val(TenLoaiTinhTrang);
+            // $('#MaLoaiPhong').val(MaLoaiPhong);
+            // $('#SoLuong').val(SoLuong);
+            $('#id').parent('div').hide();
+            $('.createValue').hide();
+            $('.updateValue').hide();
+        });
+
         /* Sửa value - P.Manh - 5/11/17*/
 
         $('.editValue').click(function() {
             var id = $(this).val();
-            var TenLoaiTinhTrang = $(this).parent().prev("td").text();
+            var TenLoaiTinhTrang = $(this).parent().prev("td").prev("td").text();
             // var MaLoaiPhong = $(this).parent().prev("td").prev("td").prev("td").text();
             // var SoLuong = $(this).parent().prev("td").prev("td").text();
             $('#id').val(id);
@@ -145,11 +157,11 @@
                         
                     }
                 }).done(function(data) {
-                   $('#myModal').modal('hide');
-                   $(".statusroomtype"+id).replaceWith(
+                 $('#myModal').modal('hide');
+                 $(".statusroomtype"+id).replaceWith(
                     ("<tr class='statusroomtype" + data.id + "'><td>" + data.id + "</td><td>" + data.TenLoaiTinhTrang + "</td><td><button class='btn btn-warning editValue' data-toggle = 'modal' data-target='#myModal' value ='" + data.id + "'><i class='fa fa-pencil-square-o'></i> Sửa</button></td><td><button type='submit' class='btn btn-danger deleteValue' value='" +data.id+ "'><i class='fa fa-trash-o'></i> Xóa</button></td></tr>")
                     );
-               })
+             })
             }
         })
 
@@ -197,8 +209,8 @@
                 <h4 class="modal-title" id="myModalLabel">Update</h4>
             </div>
             <div class="modal-body">
-               {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['statusroomtype.update',$statusroomtype->id]]) !!}
-               <div>
+             {!! Form::open(['class' => 'form-horizontal', 'method' => 'POST', 'route' => ['statusroomtype.update',$statusroomtype->id]]) !!}
+             <div>
                 <label for="label">ID</label>
                 <input type="text" name="id" class="form-control" id="id">
             </div>
